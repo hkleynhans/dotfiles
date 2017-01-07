@@ -15,6 +15,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'tomasr/molokai'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'python-mode/python-mode'
+"Plug 'Valloric/YouCompleteMe'
 
 filetype plugin indent on
 call plug#end()
