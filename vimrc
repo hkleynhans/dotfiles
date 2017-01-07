@@ -13,11 +13,13 @@ set secure                       " Disable unsafe commands
 call plug#begin('~/.vim/plugged')
 
 Plug 'tomasr/molokai'
-Plug 'Valloric/YouCompleteMe'
-Plug 'wincent/command-t'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 filetype plugin indent on
 call plug#end()
+
+let g:fzf_command_prefix='Fzf'
 
 set backspace=indent,eol,start  " Allow backspacing over everything
 set encoding=utf-8              " Prefer UTF-8 encoding
@@ -75,3 +77,12 @@ set softtabstop=4               " Number of spaces to insert when hitting tab
 set expandtab                   " Insert spaces instead of tabs
 set autoindent                  " Put the cursor in the right place on newline
 filetype plugin indent on
+
+noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
+noremap <leader>e :FzfFiles<cr>
+noremap <leader>t :FzfTags<cr>
+
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
