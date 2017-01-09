@@ -1,5 +1,6 @@
 --recurse=yes
 --exclude=.git
+--exclude=.settings
+--fields=+iaS
+--extra=+q
 --c++-kinds=+p
- --fields=+iaS
- --extra=+q
