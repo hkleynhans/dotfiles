@@ -1,0 +1,7 @@
+partial modifier_keys
+xkb_symbols "lx230" {
+    replace key <LSGT>  {
+        [ grave, asciitilde ]
+    };
+};
+
