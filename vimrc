@@ -56,8 +56,8 @@ set colorcolumn=+1              " Highlight the column after textwidth
 
 
 " Highlight tabs and trailing spaces
-set listchars=tab:▸\ ,trail:•
-set list                        " Make whitespace characters visible
+"set listchars=tab:▸\ ,trail:•
+"set list                        " Make whitespace characters visible
 
 " Colors
 syn on
