@@ -34,10 +34,10 @@ set showmatch                   " Show matching brackets
 set showmode                    " Show the current mode
 set showcmd                     " Show the command as it is typed
 
-set history=200                 " Remember more ex commands
+set history=1000                " Remember more ex commands
 set shortmess+=I                " Do not display a startup message
 set shortmess+=A                " No .swp warning
-set nohidden                    " Don't allow hidden buffers
+set hidden                      " Allow hidden buffers (swap without writing)
 
 "
 " Visual elements
@@ -47,6 +47,7 @@ set ruler                       " Show line and column numbers
 set wildmenu                    " Command completion
 set wildmode=list:longest       " List all matches and complete till longest
                                 " common string
+set scrolloff=3                 " More context around the cursor
 
 " Buffer area visuals
 set visualbell                  " Use a visual bell, don't beep
