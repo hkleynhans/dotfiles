@@ -17,6 +17,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
+Plug 'vim-syntastic/syntastic'
 "Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
 
@@ -26,6 +27,17 @@ call plug#end()
 let g:fzf_command_prefix='Fzf'
 
 let g:flake8_cmd="/bb/bigstorn/realtime_apps/IDEA/python/bin/flake8"
+let python_highlight_all=1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 set backspace=indent,eol,start  " Allow backspacing over everything
 set encoding=utf-8              " Prefer UTF-8 encoding
@@ -92,19 +104,23 @@ noremap <leader>t :FzfTags<cr>
 map <leader>i mzgg=G`z
 
 " automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 
 " Python
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+aug pygroup
+  au!
+  au FileType python setlocal tabstop=4
+  au FileType python setlocal softtabstop=4
+  au FileType python setlocal shiftwidth=4
+  au FileType python setlocal textwidth=79
+  au FileType python setlocal expandtab
+  au FileType python setlocal autoindent
+  au FileType python setlocal fileformat=unix
+  au BufWritePost *.py call Flake8()
+aug END
+
+"autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match BadWhitespace /\s\+$/
 
 
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match BadWhitespace /\s\+$/
