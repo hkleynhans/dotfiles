@@ -117,10 +117,27 @@ aug pygroup
   au FileType python setlocal textwidth=79
   au FileType python setlocal expandtab
   au FileType python setlocal autoindent
+  au FileType python setlocal shiftround     " multiple of shiftwidth
   au FileType python setlocal fileformat=unix
   au BufWritePost *.py call Flake8()
 aug END
 
-"autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match BadWhitespace /\s\+$/
+" Highlight trailing spaces
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
+set omnifunc=syntaxcomplete#Complete
+
+let OmniCpp_GlobalScopeSearch = 1    " Enable global scope search
+let OmniCpp_ShowPrototypeInAbbr = 1  " Show function parameters
+let OmniCpp_ShowAccess = 1           " Show access information in pop-up menu
+let OmniCpp_MayCompleteDot = 1       " Auto complete after '.'
+let OmniCpp_MayCompleteArrow = 1     " Auto complete after '->'
+let OmniCpp_MayCompleteScope = 0     " Auto complete after '::'
+let OmniCpp_SelectFirstItem = 0      " Don't select first item in pop-up menu
 
