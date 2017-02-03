@@ -1,4 +1,5 @@
 --recurse=yes
+--encoding=utf8
 --exclude=.git
 --exclude=.settings
 --fields=+iaS
