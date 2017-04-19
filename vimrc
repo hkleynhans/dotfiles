@@ -19,7 +19,7 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-syntastic/syntastic'
-Plug 'python-mode/python-mode'
+"Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
 
@@ -107,6 +107,9 @@ noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 noremap <leader>e :FzfFiles<cr>
 noremap <leader>t :FzfTags<cr>
 
+" Reformat the entire file - as opposed to re-indent.
+" ggVG= (reindent)
+" ggVGgq (reformat)
 map <leader>i mzgg=G`z
 
 " automatically open and close the popup menu / preview window
@@ -124,7 +127,7 @@ aug pygroup
   au FileType python setlocal autoindent
   au FileType python setlocal shiftround     " multiple of shiftwidth
   au FileType python setlocal fileformat=unix
-  au BufWritePost *.py call Flake8()
+  "au BufWritePost *.py call Flake8()
 aug END
 
 " Highlight trailing spaces
