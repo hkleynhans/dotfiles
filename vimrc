@@ -18,7 +18,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 "Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
@@ -32,13 +32,13 @@ let g:flake8_cmd="/bb/bigstorn/realtime_apps/IDEA/python/bin/flake8"
 let python_highlight_all=1
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 
 set backspace=indent,eol,start  " Allow backspacing over everything
