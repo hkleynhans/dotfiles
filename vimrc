@@ -17,8 +17,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-syntastic/syntastic'
-"Plug 'python-mode/python-mode'
+Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
 
@@ -66,6 +67,9 @@ set wildmode=list:longest       " List all matches and complete till longest
                                 " common string
 set scrolloff=3                 " More context around the cursor
 
+set complete=.,b,u,]
+set completeopt=menuone,menu,longest,preview
+
 " Buffer area visuals
 set visualbell                  " Use a visual bell, don't beep
 set cursorline                  " Highlight the current line
@@ -91,11 +95,12 @@ set smartcase                   " Don't ignore case if I type a capital
 
 
 " Tabs
-set tabstop=2                   " Number of spaces to show for a tab
-set shiftwidth=2                " Number of spaces to use for re-indent
+set tabstop=4                   " Number of spaces to show for a tab
+set shiftwidth=4                " Number of spaces to use for re-indent
 set softtabstop=4               " Number of spaces to insert when hitting tab
 set expandtab                   " Insert spaces instead of tabs
 set autoindent                  " Put the cursor in the right place on newline
+set smartindent                 " Put the cursor in the right place on newline
 filetype plugin indent on
 
 noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
@@ -105,8 +110,7 @@ noremap <leader>t :FzfTags<cr>
 map <leader>i mzgg=G`z
 
 " automatically open and close the popup menu / preview window
-autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+"autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 
 " Python
@@ -133,6 +137,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 set omnifunc=syntaxcomplete#Complete
+au BufNewFile,BufRead,BufEnter *.cpp,*.h,*.hpp set omnifunc=omni#cpp#complete#Main
 
 let OmniCpp_GlobalScopeSearch = 1    " Enable global scope search
 let OmniCpp_ShowPrototypeInAbbr = 1  " Show function parameters

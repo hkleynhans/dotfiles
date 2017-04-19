@@ -19,13 +19,14 @@
 
 ;; Load the packages we want
 (let ((required-packages '(auto-complete
-			   auto-complete-c-headers
-               ggtags
-			   company
-               rtags
-               helm
-               helm-gtags
-			   ido-ubiquitous))
+                           auto-complete-c-headers
+                           fzf
+                           ggtags
+                           company
+                           rtags
+                           helm
+                           helm-gtags
+                           ido-ubiquitous))
       (has-refreshed nil))
   (dolist (p required-packages)
     (unless (package-installed-p p)
