@@ -20,6 +20,7 @@ Plug 'nvie/vim-flake8'
 Plug 'vim-syntastic/syntastic'
 "Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
+Plug 'vim-ruby/vim-ruby'
 
 filetype plugin indent on
 call plug#end()
