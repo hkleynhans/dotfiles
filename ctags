@@ -1,7 +1,7 @@
 --recurse=yes
---encoding=utf8
 --exclude=.git
 --exclude=.settings
 --fields=+iaS
 --extra=+q
 --c++-kinds=+p
+# --encoding=utf8

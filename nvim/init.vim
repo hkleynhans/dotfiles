@@ -19,11 +19,14 @@ if dein#load_state('/Users/hkleynhans/.dein')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-jedi')
+  call dein#add('jiangmiao/auto-pairs')
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
   call dein#add('tomasr/molokai')
+
+  call dein#add('vim-ruby/vim-ruby')
 
   call dein#add('junegunn/fzf', { 'build': './install -all', 'merged':0 })
   call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
@@ -44,6 +47,7 @@ syntax enable
 
 "End dein Scripts-------------------------
 
+set completeopt-=preview
 call deoplete#enable()
 
 " Fzf
