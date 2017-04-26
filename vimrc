@@ -23,6 +23,9 @@ Plug 'editorconfig/editorconfig-vim'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
 
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+
 filetype plugin indent on
 call plug#end()
 
