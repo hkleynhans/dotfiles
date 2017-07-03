@@ -18,16 +18,22 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
+"Plug 'vim-syntastic/syntastic'
 "Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 
 filetype plugin indent on
 call plug#end()
+
+let g:airline#extensions#ale#enabled = 1
 
 let g:fzf_command_prefix='Fzf'
 
