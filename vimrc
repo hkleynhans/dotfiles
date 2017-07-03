@@ -30,10 +30,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 
+Plug 'bkad/CamelCaseMotion'
+
 filetype plugin indent on
 call plug#end()
 
 let g:airline#extensions#ale#enabled = 1
+
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 let g:fzf_command_prefix='Fzf'
 
