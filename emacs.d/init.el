@@ -24,6 +24,7 @@
 
 (require 'init-evil)
 (require 'init-flycheck)
+(require 'init-powerline)
 
 ;; Essential settings
 (setq inhibit-splash-screen t
@@ -46,6 +47,7 @@
   :diminish projectile-mode
   :config
   (projectile-global-mode)
+  (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t))
 
 (use-package helm-core
@@ -77,44 +79,6 @@
             (eldoc-mode)
             (highlight-symbol-mode)
             (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eval-last-sexp)))
-
-;; Load the packages we want
-;;(let ((required-packages '(auto-complete
-;;			   auto-complete-c-headers
-;;			   evil-mode
-;;			   flycheck
-;;			   ggtags
-;;			   company
-;;			   rtags))
-;;     (has-refreshed nil))
-;;  (dolist (p required-packages)
-;;    (unless (package-installed-p p)
-;;      (unless has-refreshed
-;;        (message "Refreshing package database...")
-;;        (package-refresh-contents)
-;;        (setq has-refreshed t)
-;;        (message "Done."))
-;;      (package-install p))))
-
-
-;;(require 'rtags)
-;;(require 'company-rtags)
-
-;;(evil-mode 1)
-
-;;(setq rtags-completions-enabled t)
-;;(eval-after-load 'company
-;;  '(add-to-list
-;;    'company-backends 'company-rtags))
-;;(setq rtags-autostart-diagnostics t)
-;;(rtags-enable-standard-keybindings)
-
-;(require 'init-ui)
-;(require 'init-behavior)
-;(require 'init-autocomplete)
-;(require 'init-programming)
-;(require 'init-helm)
-
 
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
