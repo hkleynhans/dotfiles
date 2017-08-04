@@ -9,6 +9,12 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+(add-to-list 'exec-path "/usr/local/bin")
+
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil))
+
 ;; Keep lisp customizations in a separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
@@ -25,6 +31,7 @@
 (require 'init-evil)
 (require 'init-flycheck)
 (require 'init-powerline)
+(require 'init-spell)
 
 ;; Essential settings
 (setq inhibit-splash-screen t
@@ -42,6 +49,18 @@
 (use-package gruvbox-theme :ensure t)
 (load-theme 'gruvbox)
 
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :config
+  (yas-reload-all)
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq tab-always-indent 'complete)
+  (setq yas-prompt-functions '(yas-completing-prompt
+			       yas-ido-prompt
+			       yas-dropdown-prompt))
+  (define-key yas-minor-mode-map (kbd "<escape>") 'yas-exit-snippet))
+
 (use-package projectile
   :ensure t
   :diminish projectile-mode
@@ -56,7 +75,7 @@
   :ensure t
   :config
   (evil-leader/set-key "f" 'helm-find-files)
-  (evil-leader/set-key "b" 'helm-buffer-list)
+  (evil-leader/set-key "b" 'helm-mini)
   (setq helm-buffers-fuzzy-matching t)
   (helm-mode 1))
 

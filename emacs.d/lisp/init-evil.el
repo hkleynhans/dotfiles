@@ -24,6 +24,7 @@
   (use-package evil-leader
     :ensure t
     :config
+    (evil-leader/set-leader "<SPC>")
     (global-evil-leader-mode))
 
   (use-package evil-surround

@@ -7,6 +7,7 @@
 (use-package powerline
   :ensure t)
 
+;; bad coment over here
 (use-package smart-mode-line-powerline-theme
   :ensure t)
 

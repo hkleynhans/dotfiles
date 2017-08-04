@@ -9,7 +9,7 @@
  '(epg-gpg-program "/usr/local/bin/gpg2")
  '(package-selected-packages
    (quote
-    (powerline-evil powerline company-arduino helm-swoop helm-projectile helm helm-core counsel-projectile counsel ivy evil-surround evil-leader magit projectile which-key fullframe gruvbox-theme zenburn-theme sublime-themes use-package rtags ggtags flycheck evil-tutor company auto-complete-c-headers))))
+    (yasnippet flylisp powerline-evil powerline company-arduino helm-swoop helm-projectile helm helm-core counsel-projectile counsel ivy evil-surround evil-leader magit projectile which-key fullframe gruvbox-theme zenburn-theme sublime-themes use-package rtags ggtags flycheck evil-tutor company auto-complete-c-headers))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
