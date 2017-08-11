@@ -28,9 +28,10 @@
 (eval-when-compile
   (require 'use-package))
 
-(require 'init-evil)
+;; (require 'init-evil)
 (require 'init-flycheck)
 (require 'init-powerline)
+(require 'init-programming)
 (require 'init-spell)
 
 ;; Essential settings
@@ -74,15 +75,16 @@
 (use-package helm
   :ensure t
   :config
-  (evil-leader/set-key "f" 'helm-find-files)
-  (evil-leader/set-key "b" 'helm-mini)
+  ;;(evil-leader/set-key "f" 'helm-find-files)
+  ;;(evil-leader/set-key "b" 'helm-mini)
   (setq helm-buffers-fuzzy-matching t)
   (helm-mode 1))
 
 (use-package helm-swoop
   :ensure t
   :config
-  (evil-leader/set-key "s" 'helm-swoop))
+  ;;(evil-leader/set-key "s" 'helm-swoop))
+  )
   
 (use-package helm-projectile
   :ensure t
