@@ -6,6 +6,7 @@
 (use-package company
   :ensure t
   :config
+  (use-package company-anaconda :ensure t)
   (use-package company-go :ensure t)
   (global-company-mode)
   (setq company-idle-delay 0.1)
@@ -15,6 +16,8 @@
 			    company-elisp
 			    company-go)))
   )
+
+(use-package anaconda-mode :ensure t)
 
 (defun htk--gohook ()
   "Set automatic go formatting in place."

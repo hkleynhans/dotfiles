@@ -14,6 +14,11 @@
     (setq helm-buffers-fuzzy-matching t)
     (helm-mode 1))
 
+  (use-package helm-gtags :ensure t)
+  (use-package helm-package :ensure t)
+  (use-package helm-flycheck :ensure t)
+  (use-package helm-flyspell :ensure t)
+  
   (use-package helm-swoop
     :ensure t
     :config
