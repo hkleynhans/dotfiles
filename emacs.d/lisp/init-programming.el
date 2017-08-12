@@ -3,12 +3,17 @@
 ;;; Code:
 
 
-(use-package auto-complete
+(use-package company
   :ensure t
   :config
-  (setq ac-use-quick-help t)
-  (setq ac-ignore-case 'smart)
-  (ac-config-default) ;; we use auto-complete
+  (use-package company-go :ensure t)
+  (global-company-mode)
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 1)
+  (setq company-backends '((company-capf
+			    company-files
+			    company-elisp
+			    company-go)))
   )
 
 (defun htk--gohook ()
