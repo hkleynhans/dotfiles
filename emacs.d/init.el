@@ -30,7 +30,8 @@
 
 ;; (require 'init-evil)
 (require 'init-flycheck)
-(require 'init-powerline)
+(require 'init-helm)
+;;(require 'init-powerline)
 (require 'init-programming)
 (require 'init-spell)
 
@@ -70,26 +71,6 @@
   (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t))
 
-(use-package helm-core
-  :ensure t)
-(use-package helm
-  :ensure t
-  :config
-  ;;(evil-leader/set-key "f" 'helm-find-files)
-  ;;(evil-leader/set-key "b" 'helm-mini)
-  (setq helm-buffers-fuzzy-matching t)
-  (helm-mode 1))
-
-(use-package helm-swoop
-  :ensure t
-  :config
-  ;;(evil-leader/set-key "s" 'helm-swoop))
-  )
-  
-(use-package helm-projectile
-  :ensure t
-  :config
-  (helm-projectile-on))
 
 (use-package magit :ensure t :defer t)
 
