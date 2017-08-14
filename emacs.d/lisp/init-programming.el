@@ -12,7 +12,9 @@
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 1)
   (setq company-backends '((company-capf
+			    company-dabbrev
 			    company-files
+			    company-gtags
 			    company-elisp
 			    company-go)))
   )
@@ -30,6 +32,8 @@
   (add-to-list 'exec-path "~/go/bin")
   (add-hook 'go-mode-hook 'htk--gohook)
   (setq gofmt-command "goimports")
+
+  (use-package 'golint ensure: t)
 
   (use-package go-eldoc
     :ensure t
