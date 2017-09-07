@@ -33,7 +33,7 @@
   (add-hook 'go-mode-hook 'htk--gohook)
   (setq gofmt-command "goimports")
 
-  (use-package 'golint ensure: t)
+  (use-package golint :ensure t)
 
   (use-package go-eldoc
     :ensure t

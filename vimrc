@@ -32,6 +32,8 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'bkad/CamelCaseMotion'
 
+Plug 'rhysd/vim-clang-format'
+
 filetype plugin indent on
 call plug#end()
 
@@ -124,6 +126,10 @@ noremap <leader>t :FzfTags<cr>
 " ggVG= (reindent)
 " ggVGgq (reformat)
 map <leader>i mzgg=G`z
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 " automatically open and close the popup menu / preview window
 "autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
