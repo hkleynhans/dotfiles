@@ -17,6 +17,11 @@
   (use-package helm-package :ensure t)
   (use-package helm-flycheck :ensure t)
   (use-package helm-flyspell :ensure t)
+
+  (use-package helm-ag
+    :ensure t
+    :config
+    (setq helm-ag-base-command "/usr/local/bin/ag --nocolor --nogroup"))
   
   (use-package helm-swoop
     :ensure t

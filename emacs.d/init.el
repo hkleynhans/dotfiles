@@ -98,3 +98,8 @@
   :config
   (setq fci-rule-column 80)
   (fci-mode))
+
+(use-package auto-pair
+  :ensure t
+  :config
+  (autopair-global-mode))

@@ -61,5 +61,8 @@
   (use-package go-autocomplete
     :ensure t))
 
+;;; GDB settings
+(setq gdb-many-windows t)
+
 (provide 'init-programming)
 ;;; init-programming.el ends here

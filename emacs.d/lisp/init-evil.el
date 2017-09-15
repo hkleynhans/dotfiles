@@ -52,6 +52,7 @@
     (evil-leader/set-key "f" 'helm-find-files)
     (evil-leader/set-key "b" 'helm-buffers-list)
     (evil-leader/set-key "s" 'helm-swoop)
+    (evil-leader/set-key "g" 'helm-ag)
     (evil-leader/set-key "x" 'helm-M-x)
     (evil-leader/set-key "cf" 'clang-format-buffer)
     (evil-leader/set-key "cc" 'clang-format-buffer)
