@@ -28,7 +28,7 @@
 (eval-when-compile
   (require 'use-package))
 
-;; (require 'init-evil)
+(require 'init-evil)
 (require 'init-flycheck)
 (require 'init-helm)
 ;;(require 'init-powerline)
@@ -81,6 +81,8 @@
             (eldoc-mode)
             (highlight-symbol-mode)
             (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eval-last-sexp)))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))

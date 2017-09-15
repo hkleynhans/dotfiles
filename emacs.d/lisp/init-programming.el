@@ -2,6 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun htk--clangformat-hook ()
+  "Call clang-format when saving."
+  (add-hook 'before-save-hook 'clang-format-buffer))
+
+(use-package clang-format
+  :ensure t
+  :config
+  (add-hook 'c-mode-hook 'htk--clangformat-hook)
+  (add-hook 'c++mode-hook 'htk--clangformat-hook))
+
+(use-package magit
+  :ensure t)
 
 (use-package company
   :ensure t

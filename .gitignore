@@ -1,5 +1,7 @@
 *~
 *#
+*.dat
+*.cache
 emacs.d/auto-save-list
 emacs.d/elpa
 emacs.d/init-local-prolog.el
