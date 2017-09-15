@@ -57,6 +57,11 @@
     (evil-leader/set-key "cc" 'clang-format-buffer)
     (global-evil-leader-mode))
 
+  (use-package evil-org
+    :ensure t
+    :config
+    (evil-org-set-key-theme '(navigation insert textobjects additional)))
+  
   (use-package evil-surround
     :ensure t
     :config

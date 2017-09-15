@@ -32,6 +32,7 @@
 (require 'init-flycheck)
 (require 'init-helm)
 ;;(require 'init-powerline)
+(require 'init-orgmode)
 (require 'init-programming)
 (require 'init-spell)
 
@@ -77,14 +78,23 @@
 
 ;;; Emacs Lisp mode:
 (add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (yas-minor-mode t)
-            (eldoc-mode)
-            (highlight-symbol-mode)
-            (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eval-last-sexp)))
+	  (lambda ()
+	    (yas-minor-mode t)
+	    (eldoc-mode)
+	    (highlight-symbol-mode)
+	    (define-key emacs-lisp-mode-map (kbd "<C-return>") 'eval-last-sexp)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (defvar backup-dir "~/.emacs.d/backups/")
 (setq backup-directory-alist (list (cons "." backup-dir)))
 (setq make-backup-files nil)
+
+;;; Highlight the line containing the cursor 
+(global-hl-line-mode 1)
+
+(use-package fill-column-indicator
+  :ensure t
+  :config
+  (setq fci-rule-column 80)
+  (fci-mode))

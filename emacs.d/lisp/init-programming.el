@@ -1,6 +1,14 @@
 ;;; init-programming.el -- Initializes programming modes
 ;;; Commentary:
 ;;; Code:
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
+  :config (setq markdown-command "/usr/local/bin/markdown"))
+
 (defun htk--clangformat-hook ()
   "Call clang-format when saving."
   (add-hook 'before-save-hook 'clang-format-buffer))
