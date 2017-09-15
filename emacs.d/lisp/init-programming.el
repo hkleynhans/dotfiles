@@ -1,7 +1,6 @@
 ;;; init-programming.el -- Initializes programming modes
 ;;; Commentary:
 ;;; Code:
-
 (defun htk--clangformat-hook ()
   "Call clang-format when saving."
   (add-hook 'before-save-hook 'clang-format-buffer))

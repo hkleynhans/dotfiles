@@ -3,6 +3,7 @@
 ;;;   Initialises evil mode.  It is worth looking at the following site:
 ;;;     https://github.com/bling/dotemacs/blob/master/config/init-evil.el
 ;;; code:
+  
 (defun htk--config-evil ()
   "Configure evil mode."
 
@@ -31,8 +32,10 @@
   :config
   (add-hook 'evil-mode-hook 'htk--config-evil)
   (evil-mode 1)
-  (unless (display-graphic-p)
-    (evil-esc-mode))
+  (use-package evil-escape
+    :ensure t
+    :config
+    (evil-escape-mode))
 
   (evil-put-property 'evil-state-properties 'normal    :tag " NORMAL ")
   (evil-put-property 'evil-state-properties 'insert    :tag " INSERT ")
@@ -46,6 +49,12 @@
     :ensure t
     :config
     (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key "f" 'helm-find-files)
+    (evil-leader/set-key "b" 'helm-buffers-list)
+    (evil-leader/set-key "s" 'helm-swoop)
+    (evil-leader/set-key "x" 'helm-M-x)
+    (evil-leader/set-key "cf" 'clang-format-buffer)
+    (evil-leader/set-key "cc" 'clang-format-buffer)
     (global-evil-leader-mode))
 
   (use-package evil-surround

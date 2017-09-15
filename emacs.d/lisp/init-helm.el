@@ -1,7 +1,6 @@
 ;;; init-helm.el -- Initialize Helm
 ;;; Commentary:
 ;;; Code:
-
 (use-package helm-config
   :ensure t
   :bind (("M-x" . helm-M-x)
@@ -22,7 +21,7 @@
   (use-package helm-swoop
     :ensure t
     :config
-    ;;(evil-leader/set-key "s" 'helm-swoop))
+    (evil-leader/set-key "s" 'helm-swoop)
     ))
   
 (use-package helm-projectile

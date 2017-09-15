@@ -72,6 +72,7 @@
   (setq projectile-enable-caching t))
 
 
+(use-package highlight-symbol :ensure t :defer t)
 (use-package magit :ensure t :defer t)
 
 ;;; Emacs Lisp mode:
