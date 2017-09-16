@@ -103,3 +103,6 @@
   :ensure t
   :config
   (autopair-global-mode))
+
+(use-package x509-mode
+  :ensure t)
