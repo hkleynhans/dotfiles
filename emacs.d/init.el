@@ -103,3 +103,5 @@
   :ensure t
   :config
   (autopair-global-mode))
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
