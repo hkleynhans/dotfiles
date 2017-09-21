@@ -104,4 +104,7 @@
   :config
   (autopair-global-mode))
 
+(use-package x509-mode
+  :ensure t)
+
 (add-hook 'before-save-hook 'whitespace-cleanup)
