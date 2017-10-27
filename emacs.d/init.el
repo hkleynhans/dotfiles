@@ -90,8 +90,11 @@
 (setq backup-directory-alist (list (cons "." backup-dir)))
 (setq make-backup-files nil)
 
-;;; Highlight the line containing the cursor 
+;;; Highlight the line containing the cursor
 (global-hl-line-mode 1)
+
+;; Display column numbers
+(setq column-number-mode 1)
 
 (use-package fill-column-indicator
   :ensure t

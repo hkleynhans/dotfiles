@@ -12,6 +12,14 @@ set secure                       " Disable unsafe commands
 
 call plug#begin('~/.vim/plugged')
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plug 'tomasr/molokai'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -19,7 +27,6 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'nvie/vim-flake8'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
-"Plug 'vim-syntastic/syntastic'
 "Plug 'python-mode/python-mode'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
@@ -32,10 +39,16 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'bkad/CamelCaseMotion'
 
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 Plug 'rhysd/vim-clang-format'
 
 filetype plugin indent on
 call plug#end()
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 let g:airline#extensions#ale#enabled = 1
 
@@ -45,6 +58,8 @@ let g:fzf_command_prefix='Fzf'
 
 let g:flake8_cmd="/bb/bigstorn/realtime_apps/IDEA/python/bin/flake8"
 let python_highlight_all=1
+
+let g:vim_markdown_folding_disabled = 1
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
