@@ -73,8 +73,11 @@ let g:syntastic_check_on_wq = 0
 
 set backspace=indent,eol,start  " Allow backspacing over everything
 set encoding=utf-8              " Prefer UTF-8 encoding
+
 set spell                       " Enable spell-checking
 set spelllang=en_gb             " Preferred dictionary
+
+hi! SpellBad cterm=bold,italic ctermfg=red
 
 set ttyfast                     " Local terminal
 
@@ -103,6 +106,7 @@ set completeopt=menuone,menu,longest,preview
 " Buffer area visuals
 set visualbell                  " Use a visual bell, don't beep
 set cursorline                  " Highlight the current line
+
 set textwidth=79                " Text width of 79 characters
 set colorcolumn=+1              " Highlight the column after textwidth
 

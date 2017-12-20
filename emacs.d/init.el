@@ -4,6 +4,7 @@
 (when (file-exists-p "~/.emacs.d/init-local-prolog.el")
   (load "~/.emacs.d/init-local-prolog.el"))
 
+(setq package-enable-at-startup nil)
 (package-initialize)
 
 (setq package-enable-at-startup nil)
