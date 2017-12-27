@@ -1,3 +1,9 @@
+;; Emacs configuration file                             -*- mode: lisp -*-
+
+;; Use this file for HTTP proxy settings if needed, for packages.
+(when (file-exists-p "~/.emacs.d/init-local-prolog.el")
+  (load "~/.emacs.d/init-local-prolog.el"))
+
 (setq inhibit-startup-screen t
       initial-scratch-message ";; ready\n\n"
       package-user-dir "~/.emacs-elpa"
@@ -15,7 +21,8 @@
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier nil)
-  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")))
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (toggle-frame-fullscreen))
 
 (add-to-list 'exec-path "/usr/local/bin")
 
@@ -34,10 +41,16 @@
   :config
   (load-theme 'gruvbox t))
 
+(split-window-right)
+
 (use-package ag
   :config
   (setq ag-reuse-buffers t)
   (setq ag-highlight-search t))
+
+;; Keep lisp customizations in a separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror)
 
 ;; -------------------------------------------------
 ;; 
@@ -85,19 +98,3 @@
     (global-evil-surround-mode))
 
   (use-package evil-indent-textobject))
-	   
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8e4efc4bed89c4e67167fdabff77102abeb0b1c203953de1e6ab4d2e3a02939a" default)))
- '(package-selected-packages (quote (evil use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

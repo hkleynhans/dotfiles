@@ -2,9 +2,11 @@
 *#
 *.dat
 *.cache
+*ido.last
 emacs.d/auto-save-list
 emacs.d/elpa
-emacs.d/init-local-prolog.el
+*/init-local-prolog.el
+*/custom.el
 emacs.d/recentf
 emacs.d/.tutor
 emacs.d/projectile-bookmarks.eld
