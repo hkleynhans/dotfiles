@@ -1,58 +1,63 @@
 "
+" Install minpac:
 "
-" Install Plug:
-"
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" $ mkdir -p $VIMCONFIG/pack/minpac/opt
+" $ pushd $VIMCONFIG/pack/minpac/opt
+" $ git clone https://github.com/k-takata/minpac.git
+" $ popd
 "
 
 set nocompatible                 " Use vim not vi
 set exrc                         " enable per-directory .vimrc files
 set secure                       " Disable unsafe commands
 
-call plug#begin('~/.vim/plugged')
+packadd minpac
+call minpac#init()
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+"call plug#begin('~/.vim/plugged')
 
-Plug 'tomasr/molokai'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'nvie/vim-flake8'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'w0rp/ale'
-"Plug 'python-mode/python-mode'
-"Plug 'Valloric/YouCompleteMe'
-Plug 'vim-ruby/vim-ruby'
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"
+call minpac#add('tomasr/molokai')
+call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
+call minpac#add('junegunn/fzf.vim')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-scripts/indentpython.vim'
+"Plug 'nvie/vim-flake8'
+"Plug 'editorconfig/editorconfig-vim'
+call minpac#add('w0rp/ale')
+""Plug 'python-mode/python-mode'
+""Plug 'Valloric/YouCompleteMe'
+"Plug 'vim-ruby/vim-ruby'
+"
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
 
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tpope/vim-dispatch')
+call minpac#add('tpope/vim-fugitive')
 
-Plug 'bkad/CamelCaseMotion'
-
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-
-Plug 'rhysd/vim-clang-format'
+"Plug 'bkad/CamelCaseMotion'
+"
+"Plug 'godlygeek/tabular'
+"Plug 'plasticboy/vim-markdown'
+"
+call minpac#add('rhysd/vim-clang-format')
 
 filetype plugin indent on
-call plug#end()
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
 let g:airline#extensions#ale#enabled = 1
 
-call camelcasemotion#CreateMotionMappings('<leader>')
+"call camelcasemotion#CreateMotionMappings('<leader>')
 
 let g:fzf_command_prefix='Fzf'
 
@@ -62,14 +67,7 @@ let python_highlight_all=1
 let g:vim_markdown_folding_disabled = 1
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 
 set backspace=indent,eol,start  " Allow backspacing over everything
 set encoding=utf-8              " Prefer UTF-8 encoding
@@ -140,6 +138,7 @@ filetype plugin indent on
 noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 noremap <leader>e :FzfFiles<cr>
 noremap <leader>t :FzfTags<cr>
+nnoremap <C-p> :<C-u>FZF<CR>
 
 " Reformat the entire file - as opposed to re-indent.
 " ggVG= (reindent)
