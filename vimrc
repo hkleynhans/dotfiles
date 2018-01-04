@@ -50,6 +50,8 @@ call minpac#add('tpope/vim-fugitive')
 "
 call minpac#add('rhysd/vim-clang-format')
 
+call minpac#add('qpkorr/vim-bufkill')
+
 filetype plugin indent on
 
 " Use deoplete.
@@ -148,9 +150,13 @@ noremap <F8> :lnext<cr>
 " ggVGgq (reformat)
 map <leader>i mzgg=G`z
 
+" Look for a .clang-format file
+let g:clang_format#detect_style_file=1
+
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " automatically open and close the popup menu / preview window
 "autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
