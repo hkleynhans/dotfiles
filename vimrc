@@ -138,7 +138,10 @@ filetype plugin indent on
 noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 noremap <leader>e :FzfFiles<cr>
 noremap <leader>t :FzfTags<cr>
-nnoremap <C-p> :<C-u>FZF<CR>
+noremap <leader>b :Make<cr>
+noremap <F7> :lprev<cr>
+noremap <F8> :lnext<cr>
+
 
 " Reformat the entire file - as opposed to re-indent.
 " ggVG= (reindent)
