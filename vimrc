@@ -23,7 +23,9 @@ call minpac#init()
 "  Plug 'roxma/nvim-yarp'
 "  Plug 'roxma/vim-hug-neovim-rpc'
 "endif
-"
+
+
+call minpac#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
 call minpac#add('tomasr/molokai')
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
 call minpac#add('junegunn/fzf.vim')
@@ -71,6 +73,7 @@ let g:vim_markdown_folding_disabled = 1
 set statusline+=%#warningmsg#
 set statusline+=%*
 
+set autowrite                   " Automatically save if we are switching buffers
 set backspace=indent,eol,start  " Allow backspacing over everything
 set encoding=utf-8              " Prefer UTF-8 encoding
 
@@ -154,9 +157,11 @@ map <leader>i mzgg=G`z
 let g:clang_format#detect_style_file=1
 
 " map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-autocmd FileType c,cpp,objc ClangFormatAutoEnable
+aug cpp
+    au FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+    au FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+    au FileType c,cpp,objc ClangFormatAutoEnable
+aug END
 
 " automatically open and close the popup menu / preview window
 "autocmd CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
@@ -174,6 +179,13 @@ aug pygroup
   au FileType python setlocal shiftround     " multiple of shiftwidth
   au FileType python setlocal fileformat=unix
   "au BufWritePost *.py call Flake8()
+aug END
+
+" Go
+aug go
+  au!
+  au FileType go nmap <leader>b :GoBuild<cr>
+  au FileType go nmap <leader>r :GoRun<cr>
 aug END
 
 " Highlight trailing spaces

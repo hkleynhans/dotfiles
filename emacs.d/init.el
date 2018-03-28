@@ -31,7 +31,17 @@
 
 ;; Keep emacs custom settings in a separate file
 (setq custom-file(expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+;; Keep backups in the temp folder.
+(setq backup-by-copying t      ; don't clobber symlinks
+      backup-directory-alist
+      '(("." . "~/.emacs-saves/"))   ; don't litter my fs tree
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)       ; use versioned backups
 
 ;;(defun init--package-install (package)
 ;;  (when (not (package-installed-p package))
@@ -79,8 +89,8 @@
 (split-window-horizontally)
 (setq truncate-partial-width-windows nil)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(set-face-attribute 'default nil :font "Liberation Mono-10" )
-(set-frame-font "Liberation Mono-10" nil t)
+;;(set-face-attribute 'default nil :font "Liberation Mono-10" )
+;;(set-frame-font "Liberation Mono-10" nil t)
 
 (use-package company
   :ensure t
