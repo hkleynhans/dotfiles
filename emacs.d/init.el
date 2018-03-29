@@ -135,7 +135,8 @@
 
 (use-package compile
   :no-require
-  :bind (("C-c c" . compile)))
+  :bind (("C-c i" . compile)
+	 ("C-c c" . recompile)))
 
 (use-package counsel
   :after ivy
