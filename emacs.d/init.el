@@ -1,3 +1,4 @@
+
 ;; Disable interface elements
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -148,7 +149,9 @@
   :config
   (counsel-projectile-mode))
 
-(use-package flycheck)
+(use-package flycheck
+  :config
+  (global-flycheck-mode))
 
 (use-package flyspell)
 
@@ -158,7 +161,10 @@
   :ensure t
   :diminish
   :config
-  (projectile-global-mode))
+  (projectile-global-mode 1))
+
+(use-package go-projectile
+  :after projectile)
 
 (use-package smooth-scrolling
   :ensure t

@@ -14,29 +14,12 @@ set secure                       " Disable unsafe commands
 packadd minpac
 call minpac#init()
 
-"call plug#begin('~/.vim/plugged')
-
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-
-
 call minpac#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
 call minpac#add('tomasr/molokai')
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
 call minpac#add('junegunn/fzf.vim')
 
-"Plug 'vim-scripts/indentpython.vim'
-"Plug 'nvie/vim-flake8'
-"Plug 'editorconfig/editorconfig-vim'
 call minpac#add('w0rp/ale')
-""Plug 'python-mode/python-mode'
-""Plug 'Valloric/YouCompleteMe'
-"Plug 'vim-ruby/vim-ruby'
 "
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
@@ -45,27 +28,26 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-fugitive')
 
-"Plug 'bkad/CamelCaseMotion'
-"
-"Plug 'godlygeek/tabular'
-"Plug 'plasticboy/vim-markdown'
-"
 call minpac#add('rhysd/vim-clang-format')
 
 call minpac#add('qpkorr/vim-bufkill')
 
 filetype plugin indent on
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
+let g:go_list_type = "quickfix"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
 
 let g:airline#extensions#ale#enabled = 1
 
-"call camelcasemotion#CreateMotionMappings('<leader>')
-
 let g:fzf_command_prefix='Fzf'
 
-let g:flake8_cmd="/bb/bigstorn/realtime_apps/IDEA/python/bin/flake8"
 let python_highlight_all=1
 
 let g:vim_markdown_folding_disabled = 1
@@ -79,8 +61,6 @@ set encoding=utf-8              " Prefer UTF-8 encoding
 
 set spell                       " Enable spell-checking
 set spelllang=en_gb             " Preferred dictionary
-
-hi! SpellBad cterm=bold,italic ctermfg=red
 
 set ttyfast                     " Local terminal
 
@@ -110,19 +90,26 @@ set completeopt=menuone,menu,longest,preview
 set visualbell                  " Use a visual bell, don't beep
 set cursorline                  " Highlight the current line
 
-set textwidth=79                " Text width of 79 characters
+"set textwidth=79                " Text width of 79 characters
 set colorcolumn=+1              " Highlight the column after textwidth
 
+map <C-n> :cnext<CR>
+map <C-p> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
 " Highlight tabs and trailing spaces
-"set listchars=tab:▸\ ,trail:•
-"set list                        " Make whitespace characters visible
+set listchars=tab:▸\ ,trail:•
+set nolist                      " Make whitespace characters visible
 
 " Colors
 syn on
 set background=dark
 set t_Co=256                    " Enable 256 colors
 colorscheme molokai
+
+hi clear SpellBad
+hi SpellBad cterm=underline ctermbg=52
+
 
 " Search
 set incsearch                   " Incrementally search
@@ -132,10 +119,9 @@ set smartcase                   " Don't ignore case if I type a capital
 
 
 " Tabs
-set tabstop=4                   " Number of spaces to show for a tab
-set shiftwidth=4                " Number of spaces to use for re-indent
-set softtabstop=4               " Number of spaces to insert when hitting tab
-set expandtab                   " Insert spaces instead of tabs
+set tabstop=8                   " Number of spaces to show for a tab
+set shiftwidth=8                " Number of spaces to use for re-indent
+"set softtabstop=4               " Number of spaces to insert when hitting tab
 set autoindent                  " Put the cursor in the right place on newline
 set smartindent                 " Put the cursor in the right place on newline
 filetype plugin indent on
@@ -161,6 +147,7 @@ aug cpp
     au FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
     au FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
     au FileType c,cpp,objc ClangFormatAutoEnable
+    au FileType c,cpp,objc set expandtab   " Insert spaces instead of tabs
 aug END
 
 " automatically open and close the popup menu / preview window
@@ -179,6 +166,7 @@ aug pygroup
   au FileType python setlocal shiftround     " multiple of shiftwidth
   au FileType python setlocal fileformat=unix
   "au BufWritePost *.py call Flake8()
+  au FileType python set expandtab           " Insert spaces instead of tabs
 aug END
 
 " Go
@@ -186,6 +174,7 @@ aug go
   au!
   au FileType go nmap <leader>b :GoBuild<cr>
   au FileType go nmap <leader>r :GoRun<cr>
+  au FileType go set noexpandtab             " Insert tabs
 aug END
 
 " Highlight trailing spaces
