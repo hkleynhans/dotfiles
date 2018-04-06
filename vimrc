@@ -18,13 +18,23 @@ call minpac#add('ctrlpvim/ctrlp.vim')
 
 call minpac#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
 call minpac#add('tomasr/molokai')
-call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-call minpac#add('junegunn/fzf.vim')
+
+" Using CtrlP since it does not require an external binary and has better
+" shortcuts and usage.
+"
+" call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
+" call minpac#add('junegunn/fzf.vim')
 
 call minpac#add('w0rp/ale')
-"
+
+" call minpac#add('Valloric/YouCompleteMe', {'do': 'git submodule update --init --recursive && ./install.py --clang-completer --go-completer'})
+
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+
+" call minpac#add('Shougo/deoplete.nvim')
+" call minpac#add('roxma/nvim-yarp')
+" call minpac#add('roxma/vim-hug-neovim-rpc')
 
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-dispatch')
@@ -35,6 +45,8 @@ call minpac#add('rhysd/vim-clang-format')
 call minpac#add('qpkorr/vim-bufkill')
 
 filetype plugin indent on
+
+" let g:deoplete#enable_at_startup = 1
 
 let g:go_list_type = "quickfix"
 let g:go_highlight_types = 1
@@ -49,7 +61,7 @@ let g:go_highlight_generate_tags = 1
 
 let g:airline#extensions#ale#enabled = 1
 
-let g:fzf_command_prefix='Fzf'
+" let g:fzf_command_prefix='Fzf'
 
 let python_highlight_all=1
 
@@ -135,8 +147,9 @@ set smartindent                 " Put the cursor in the right place on newline
 filetype plugin indent on
 
 noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
-noremap <leader>e :FzfFiles<cr>
-noremap <leader>t :FzfTags<cr>
+" noremap <leader>e :FzfFiles<cr>
+" noremap <leader>f :FzfBuffers<cr>
+" noremap <leader>t :FzfTags<cr>
 noremap <leader>b :Make<cr>
 noremap <F7> :lprev<cr>
 noremap <F8> :lnext<cr>
