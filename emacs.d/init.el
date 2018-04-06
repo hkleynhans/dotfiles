@@ -1,4 +1,6 @@
 
+;;; Code:
+
 ;; Disable interface elements
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -93,6 +95,14 @@
 ;;(set-face-attribute 'default nil :font "Liberation Mono-10" )
 ;;(set-frame-font "Liberation Mono-10" nil t)
 
+(use-package cc-mode
+  :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
+         ("\\.m\\'" . c-mode)
+         ("\\.mm\\'" . c++-mode))
+  :hook (c-mode-common . (lambda()
+			   (flyspell-prog-mode))))
+  
+
 (use-package company
   :ensure t
   :diminish
@@ -150,6 +160,9 @@
   :config
   (counsel-projectile-mode))
 
+(use-package counsel-etags
+  :after (counsel))
+
 (use-package flycheck
   :config
   (global-flycheck-mode))
@@ -162,7 +175,7 @@
   :ensure t
   :diminish
   :config
-  (projectile-global-mode 1))
+  (projectile-mode 1))
 
 (use-package go-projectile
   :after projectile)
@@ -171,3 +184,6 @@
   :ensure t
   :config
   (smooth-scrolling-mode 1))
+
+(provide 'init)
+;;; init.el ends here

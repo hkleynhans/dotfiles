@@ -14,6 +14,8 @@ set secure                       " Disable unsafe commands
 packadd minpac
 call minpac#init()
 
+call minpac#add('ctrlpvim/ctrlp.vim')
+
 call minpac#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
 call minpac#add('tomasr/molokai')
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
@@ -43,6 +45,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
+" let g:go_fmt_command = "goimports"
 
 let g:airline#extensions#ale#enabled = 1
 
