@@ -55,6 +55,10 @@ let python_highlight_all=1
 
 let g:vim_markdown_folding_disabled = 1
 
+set autoread
+set display+=lastline
+set formatoptions+=j            " Delete comment char when joining commented lines
+
 set statusline+=%#warningmsg#
 set statusline+=%*
 
@@ -85,6 +89,7 @@ set wildmenu                    " Command completion
 set wildmode=list:longest       " List all matches and complete till longest
                                 " common string
 set scrolloff=3                 " More context around the cursor
+set sidescrolloff=5             " More context around the cursor
 
 set complete=.,b,u,]
 set completeopt=menuone,menu,longest,preview
