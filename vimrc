@@ -95,7 +95,8 @@ set completeopt=menuone,menu,longest,preview
 
 " Buffer area visuals
 set visualbell                  " Use a visual bell, don't beep
-set cursorline                  " Highlight the current line
+" set cursorline                  " Highlight the current line
+set lazyredraw
 
 "set textwidth=79                " Text width of 79 characters
 set colorcolumn=+1              " Highlight the column after textwidth
