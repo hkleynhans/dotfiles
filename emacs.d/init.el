@@ -1,4 +1,5 @@
-
+;;; init.el --- Emacs configuration
+;;; Commentary:
 ;;; Code:
 
 ;; Disable interface elements
@@ -6,6 +7,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+(require 'cl)
 
 ;;; Standard package repositories
 (require 'package)
@@ -17,6 +19,31 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 (package-initialize)
+
+
+(defvar htk-packages
+  '(company company-elisp company-go counsel counsel-projectile edit-server
+	    flycheck flyspell ivy magit projectile go-projectile python smooth-scrolling
+	    use-package)
+  "A list of packages to ensure are installed at launch.")
+
+(defun htk-packages-installed-p ()
+  (loop for p in htk-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+  
+
+(unless (htk-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Refreshing the package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p htk-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -186,4 +213,5 @@
   (smooth-scrolling-mode 1))
 
 (provide 'init)
+
 ;;; init.el ends here
