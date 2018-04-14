@@ -22,7 +22,7 @@
 
 
 (defvar htk-packages
-  '(company company-elisp company-go counsel counsel-projectile edit-server
+  '(company company-go counsel-etags counsel counsel-projectile edit-server
 	    flycheck flyspell ivy magit projectile go-projectile python smooth-scrolling
 	    use-package)
   "A list of packages to ensure are installed at launch.")
@@ -31,7 +31,7 @@
   (loop for p in htk-packages
         when (not (package-installed-p p)) do (return nil)
         finally (return t)))
-  
+
 
 (unless (htk-packages-installed-p)
   ;; check for new packages (package versions)
@@ -122,13 +122,22 @@
 ;;(set-face-attribute 'default nil :font "Liberation Mono-10" )
 ;;(set-frame-font "Liberation Mono-10" nil t)
 
+;; Show trailing whitespace as well as tabs.  Remove trailing whitespace on
+;; save.
+(setq-default show-trailing-whitespace t)
+(setq-default show-tabs t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Replace tabs with spaces.
+(setq-default indent-tabs-mode nil)
+
 (use-package cc-mode
   :mode (("\\.h\\(h?\\|xx\\|pp\\)\\'" . c++-mode)
          ("\\.m\\'" . c-mode)
          ("\\.mm\\'" . c++-mode))
   :hook (c-mode-common . (lambda()
 			   (flyspell-prog-mode))))
-  
+
 
 (use-package company
   :ensure t
