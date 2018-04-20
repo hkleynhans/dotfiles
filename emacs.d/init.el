@@ -201,10 +201,10 @@
   :config
   (counsel-mode 1))
 
-(use-package counsel-projectile
-  :after (counsel projectile)
-  :config
-  (counsel-projectile-mode))
+;; (use-package counsel-projectile
+;;   :after (counsel projectile)
+;;   :config
+;;   (counsel-projectile-mode))
 
 (use-package counsel-etags
   :after (counsel))
@@ -223,14 +223,15 @@
 
 (use-package magit :ensure t)
 
-(use-package projectile
-  :ensure t
-  :diminish
-  :config
-  (projectile-mode 1))
+;; Not sure I actually like projectile.
+;; (use-package projectile
+;;   :ensure t
+;;   :diminish
+;;   :config
+;;   (projectile-mode 1))
 
-(use-package go-projectile
-  :after projectile)
+;; (use-package go-projectile
+;;   :after projectile)
 
 (use-package smooth-scrolling
   :ensure t
