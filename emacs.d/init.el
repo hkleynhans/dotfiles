@@ -21,6 +21,11 @@
 (package-initialize)
 
 
+(global-set-key (kbd "M-o") 'other-window)
+
+;; Use UTF-8 Unix line endings by default.
+(setq buffer-file-coding-system 'utf-8-unix)
+
 (defvar htk-packages
   '(company company-go counsel-etags counsel counsel-projectile edit-server
 	    flycheck flyspell ivy magit projectile go-projectile python smooth-scrolling
@@ -175,6 +180,7 @@
 
 (use-package ivy
   :diminish
+  :bind (("C-c C-r" . ivy-resume))
   :config
   (ivy-mode 1)
   (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
@@ -186,6 +192,10 @@
 
 (use-package counsel
   :after ivy
+  :bind (("C-s" . swiper)
+         ("C-c g" . counsel-git)
+         ("C-c j" . counsel-git-grep)
+         ("C-c k" . counsel-ag))
   :demand t
   :diminish
   :config
@@ -200,10 +210,16 @@
   :after (counsel))
 
 (use-package flycheck
+  :diminish
   :config
   (global-flycheck-mode))
 
-(use-package flyspell)
+(use-package flyspell
+  :diminish
+  :config
+  (setq ispell-dictionary "british")
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 (use-package magit :ensure t)
 
