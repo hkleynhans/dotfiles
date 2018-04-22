@@ -27,8 +27,11 @@
 (setq buffer-file-coding-system 'utf-8-unix)
 
 (defvar htk-packages
-  '(company company-go counsel-etags counsel counsel-projectile edit-server
-	    flycheck flyspell ivy magit projectile go-projectile python smooth-scrolling
+  '(company clang-format company-go counsel-etags counsel counsel-projectile
+            edit-server
+	    flycheck flyspell ivy magit projectile
+            go-projectile python cmake-mode
+            smooth-scrolling company-c-headers
 	    use-package)
   "A list of packages to ensure are installed at launch.")
 
@@ -144,6 +147,11 @@
 			   (flyspell-prog-mode))))
 
 
+(use-package clang-format
+  :diminish
+  :bind (("C-c u" . clang-format-buffer)
+         ("C-c /" . clang-format-region)))
+
 (use-package company
   :ensure t
   :diminish
@@ -158,18 +166,15 @@
   :config
   (push 'company-elisp company-backends))
 
+(use-package company-c-headers
+  :after company
+  :config
+  (push 'company-c-headers company-backends))
+
 (use-package company-go
   :after company
   :config
   (push 'company-go company-backends))
-
-;; (use-package ido-vertical-mode
-;;   ;; Experimenting with ivy-mode
-;;   :disabled t
-;;   :init
-;;   (ido-mode 1)
-;;   (ido-vertical-mode 1)
-;;   (setq ido-vertical-define-keys 'C-n-and-C-p-only))
 
 ;; Emacs server
 (use-package edit-server
@@ -179,6 +184,7 @@
   (add-hook 'after-init-hook 'edit-server-start t))
 
 (use-package ivy
+  :demand t
   :diminish
   :bind (("C-c C-r" . ivy-resume))
   :config
@@ -195,7 +201,10 @@
   :bind (("C-s" . swiper)
          ("C-c g" . counsel-git)
          ("C-c j" . counsel-git-grep)
-         ("C-c k" . counsel-ag))
+         ("C-c k" . counsel-ag)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h f" . counsel-describe-function)
+         ("M-x" . counsel-M-x))
   :demand t
   :diminish
   :config
