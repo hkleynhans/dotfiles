@@ -28,11 +28,8 @@
 
 (defvar htk-packages
   '(company clang-format company-go counsel-etags counsel counsel-projectile
-            edit-server
-	    flycheck flyspell ivy magit projectile
-            go-projectile python cmake-mode
-            smooth-scrolling company-c-headers
-	    use-package)
+            edit-server flycheck flyspell ivy magit python cmake-mode
+            smooth-scrolling company-c-headers use-package)
   "A list of packages to ensure are installed at launch.")
 
 (defun htk-packages-installed-p ()
