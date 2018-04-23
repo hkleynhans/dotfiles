@@ -32,8 +32,8 @@
 
 (defvar htk-packages
   '(company clang-format company-go counsel-etags counsel counsel-projectile
-            edit-server flycheck flyspell ivy magit python cmake-mode
-            smooth-scrolling company-c-headers use-package)
+            edit-server flycheck flycheck-clangcheck flyspell go-mode ivy magit
+            python cmake-mode smooth-scrolling company-c-headers use-package)
   "A list of packages to ensure are installed at launch.")
 
 (defun htk-packages-installed-p ()
@@ -153,6 +153,10 @@
   :bind (("C-c u" . clang-format-buffer)
          ("C-c /" . clang-format-region)))
 
+(use-package go-mode
+  :config
+  (add-hook 'before-save-hook #'gofmt-before-save))
+
 (use-package company
   :ensure t
   :diminish
@@ -223,6 +227,18 @@
   :diminish
   :config
   (global-flycheck-mode))
+
+(use-package flycheck-clangcheck
+  :diminish
+  :after flycheck
+  :config
+  (defun my-select-clangcheck-for-checker ()
+    "Select clang-check for flycheck's checker."
+    (flycheck-select-checker 'c/c++-clangcheck))
+
+  (add-hook 'c-mode-hook #'my-select-clangcheck-for-checker)
+  (add-hook 'c++-mode-hook #'my-select-clangcheck-for-checker)
+  (setq flycheck-clangcheck-analyze t))
 
 (use-package flyspell
   :diminish
