@@ -39,8 +39,8 @@
 (defvar htk-packages
   '(company clang-format company-go company-c-headers company-glsl
             counsel-etags counsel docker edit-server flycheck
-            flycheck-clangcheck flyspell glsl-mode go-mode ivy magit python
-            cmake-mode smooth-scrolling use-package x509-mode)
+            flycheck-clangcheck flyspell glsl-mode go-mode groovy-mode ivy
+            magit python cmake-mode smooth-scrolling use-package x509-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun htk-packages-installed-p ()
@@ -258,6 +258,9 @@
   (smooth-scrolling-mode 1))
 
 (use-package x509-mode :ensure t)
+(use-package groovy-mode
+  :ensure t
+  :mode (("\\Jenkinsfile\\'" . groovy-mode)))
 
 (provide 'init)
 
