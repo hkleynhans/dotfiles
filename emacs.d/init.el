@@ -22,6 +22,10 @@
 
 
 (global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "A-<down>") 'enlarge-window)
+(global-set-key (kbd "A-<up>") 'shrink-window)
+(global-set-key (kbd "A-<left>") 'enlarge-window-horizontally)
+(global-set-key (kbd "A-<right>") 'shrink-window-horizontally)
 
 ;; Use UTF-8 Unix line endings by default.
 (setq buffer-file-coding-system 'utf-8-unix)
