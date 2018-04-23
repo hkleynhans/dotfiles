@@ -21,19 +21,22 @@
 (package-initialize)
 
 
+(add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
+(require 'move-border)
+
 (global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "A-<down>") 'enlarge-window)
-(global-set-key (kbd "A-<up>") 'shrink-window)
-(global-set-key (kbd "A-<left>") 'enlarge-window-horizontally)
-(global-set-key (kbd "A-<right>") 'shrink-window-horizontally)
+(global-set-key (kbd "M-<down>") 'move-border-down)
+(global-set-key (kbd "M-<up>") 'move-border-up)
+(global-set-key (kbd "M-<right>") 'move-border-right)
+(global-set-key (kbd "M-<left>") 'move-border-left)
 
 ;; Use UTF-8 Unix line endings by default.
 (setq buffer-file-coding-system 'utf-8-unix)
 
 (defvar htk-packages
-  '(company clang-format company-go counsel-etags counsel counsel-projectile
-            edit-server flycheck flycheck-clangcheck flyspell go-mode ivy magit
-            python cmake-mode smooth-scrolling company-c-headers use-package)
+  '(company clang-format company-go company-c-headers counsel-etags counsel
+            docker edit-server flycheck flycheck-clangcheck flyspell go-mode
+            ivy magit python cmake-mode smooth-scrolling use-package)
   "A list of packages to ensure are installed at launch.")
 
 (defun htk-packages-installed-p ()
@@ -81,22 +84,6 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)       ; use versioned backups
-
-;;(defun init--package-install (package)
-;;  (when (not (package-installed-p package))
-;;    (package-install package))
-;;  (delete-other-windows))
-
-;; Install extensions if they are missing
-;; (defun init--install-packages ()
-;;(init--package-install "magit")
-;;  (init--package-install "markdown-mode"))
-
-;; (condition-case nil
-;; (init--install-packages)
-;;   (error
-;;    (package-refresh-contents)
-;;    (init--install-packages)))
 
 (setq font-lock-maximum-decoration t
       color-theme-is-global t
@@ -181,6 +168,17 @@
   :config
   (push 'company-go company-backends))
 
+(use-package docker
+  :ensure t
+  :config
+  (docker-global-mode t))
+
+(use-package dockerfile-mode
+  :mode (("\\.Dockerfile\\'" . dockerfile-mode))
+  :ensure t)
+
+
+
 ;; Emacs server
 (use-package edit-server
   :if window-system
@@ -215,11 +213,6 @@
   :config
   (counsel-mode 1))
 
-;; (use-package counsel-projectile
-;;   :after (counsel projectile)
-;;   :config
-;;   (counsel-projectile-mode))
-
 (use-package counsel-etags
   :after (counsel))
 
@@ -248,16 +241,6 @@
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 (use-package magit :ensure t)
-
-;; Not sure I actually like projectile.
-;; (use-package projectile
-;;   :ensure t
-;;   :diminish
-;;   :config
-;;   (projectile-mode 1))
-
-;; (use-package go-projectile
-;;   :after projectile)
 
 (use-package smooth-scrolling
   :ensure t
