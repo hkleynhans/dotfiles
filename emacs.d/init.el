@@ -20,8 +20,11 @@
 (add-to-list 'package-archives '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 (package-initialize)
 
+(require 'ansi-color)
+(setq ansi-color-for-comint-mode t)
 
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
+(require 'bbg-style)
 (require 'move-border)
 
 (global-set-key (kbd "M-o") 'other-window)
@@ -34,9 +37,10 @@
 (setq buffer-file-coding-system 'utf-8-unix)
 
 (defvar htk-packages
-  '(company clang-format company-go company-c-headers counsel-etags counsel
-            docker edit-server flycheck flycheck-clangcheck flyspell go-mode
-            ivy magit python cmake-mode smooth-scrolling use-package)
+  '(company clang-format company-go company-c-headers company-glsl
+            counsel-etags counsel docker edit-server flycheck
+            flycheck-clangcheck flyspell glsl-mode go-mode ivy magit python
+            cmake-mode smooth-scrolling use-package x509-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun htk-packages-installed-p ()
@@ -168,6 +172,12 @@
   :config
   (push 'company-go company-backends))
 
+(use-package glsl-mode :ensure t)
+(use-package company-glsl
+  :ensure t
+  :config
+  (push 'company-glsl company-backends))
+
 (use-package docker
   :ensure t
   :config
@@ -246,6 +256,8 @@
   :ensure t
   :config
   (smooth-scrolling-mode 1))
+
+(use-package x509-mode :ensure t)
 
 (provide 'init)
 
