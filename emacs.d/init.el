@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Use this file for HTTP proxy settings if needed, for packages.
+(when (file-exists-p "~/.emacs.d/init-local-prolog.el")
+  (load "~/.emacs.d/init-local-prolog.el"))
+
 ;; Disable interface elements
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -33,14 +37,22 @@
 (global-set-key (kbd "M-<right>") 'move-border-right)
 (global-set-key (kbd "M-<left>") 'move-border-left)
 
-;; Use UTF-8 Unix line endings by default.
+;; Use UTF-8 Unix line sdf endings by default.
 (setq buffer-file-coding-system 'utf-8-unix)
+
+;; On Windows we use aspell.
+(if (string-equal system-type "windows-nt")
+    (progn
+      (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+      (setq ispell-program-name "aspell")
+      (setq ispell-personal-dictionary (expand-file-name ".ispell" user-emacs-directory))
+      (require 'ispell)))
 
 (defvar htk-packages
   '(company clang-format company-go company-c-headers company-glsl
-            counsel-etags counsel docker edit-server flycheck
-            flycheck-clangcheck flyspell glsl-mode go-mode groovy-mode ivy
-            magit python cmake-mode smooth-scrolling use-package x509-mode)
+            counsel-etags counsel diminish docker edit-server flycheck
+            flycheck-clangcheck flyspell glsl-mode go-mode gruvbox-theme groovy-mode
+	    ivy magit python cmake-mode smooth-scrolling use-package x509-mode)
   "A list of packages to ensure are installed at launch.")
 
 (defun htk-packages-installed-p ()
