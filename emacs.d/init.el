@@ -174,10 +174,10 @@
   :config
   (push 'company-elisp company-backends))
 
-(use-package company-c-headers
-  :after company
-  :config
-  (push 'company-c-headers company-backends))
+;;(use-package company-c-headers
+;;  :after company
+;;  :config
+;;  (push 'company-c-headers company-backends))
 
 (use-package company-go
   :after company
@@ -243,17 +243,17 @@
   :config
   (global-flycheck-mode))
 
-(use-package flycheck-clangcheck
-  :diminish
-  :after flycheck
-  :config
-  (defun my-select-clangcheck-for-checker ()
-    "Select clang-check for flycheck's checker."
-    (flycheck-select-checker 'c/c++-clangcheck))
+;; (use-package flycheck-clangcheck
+;;   :diminish
+;;   :after flycheck
+;;   :config
+;;   (defun my-select-clangcheck-for-checker ()
+;;     "Select clang-check for flycheck's checker."
+;;     (flycheck-select-checker 'c/c++-clangcheck))
 
-  (add-hook 'c-mode-hook #'my-select-clangcheck-for-checker)
-  (add-hook 'c++-mode-hook #'my-select-clangcheck-for-checker)
-  (setq flycheck-clangcheck-analyze t))
+;;   (add-hook 'c-mode-hook #'my-select-clangcheck-for-checker)
+;;   (add-hook 'c++-mode-hook #'my-select-clangcheck-for-checker)
+;;   (setq flycheck-clangcheck-analyze t))
 
 (use-package flyspell
   :diminish
