@@ -190,10 +190,10 @@
   :config
   (push 'company-glsl company-backends))
 
-(use-package docker
-  :ensure t
-  :config
-  (docker-global-mode t))
+;;(use-package docker
+;;  :ensure t
+;;  :config
+;;  (docker-global-mode t))
 
 (use-package dockerfile-mode
   :mode (("\\.Dockerfile\\'" . dockerfile-mode))

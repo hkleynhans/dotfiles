@@ -48,6 +48,8 @@ let g:go_highlight_generate_tags = 1
 
 let g:airline#extensions#ale#enabled = 1
 
+let g:ale_sign_column_always = 1
+
 let g:fzf_command_prefix='Fzf'
 
 let python_highlight_all=1
