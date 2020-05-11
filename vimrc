@@ -20,16 +20,14 @@ set secure                       " Disable unsafe commands
 packadd minpac
 call minpac#init()
 
-call minpac#add('fatih/vim-go', { 'do': ':GoInstallBinaries' })
 call minpac#add('tomasr/molokai')
 
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
 call minpac#add('junegunn/fzf.vim')
 
-call minpac#add('w0rp/ale')
+call minpac#add('dense-analysis/ale')
 
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('itchyny/lightline.vim')
 
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-dispatch')
@@ -39,18 +37,10 @@ call minpac#add('rhysd/vim-clang-format')
 
 call minpac#add('qpkorr/vim-bufkill')
 
-filetype plugin indent on
+packloadall
+silent !helptags ALL
 
-let g:go_list_type = "quickfix"
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-" let g:go_fmt_command = "goimports"
+filetype plugin indent on
 
 let g:airline#extensions#ale#enabled = 1
 
@@ -180,14 +170,6 @@ aug pygroup
   au FileType python setlocal fileformat=unix
   "au BufWritePost *.py call Flake8()
   au FileType python set expandtab           " Insert spaces instead of tabs
-aug END
-
-" Go
-aug go
-  au!
-  au FileType go nmap <leader>b :GoBuild<cr>
-  au FileType go nmap <leader>r :GoRun<cr>
-  au FileType go set noexpandtab             " Insert tabs
 aug END
 
 " Highlight trailing spaces
