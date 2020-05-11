@@ -1,10 +1,16 @@
 "
+"
 " Install minpac:
 "
-" $ mkdir -p $VIMCONFIG/pack/minpac/opt
-" $ pushd $VIMCONFIG/pack/minpac/opt
-" $ git clone https://github.com/k-takata/minpac.git
-" $ popd
+" Vim:
+"
+" git clone https://github.com/k-takata/minpac.git \
+"    ~/.vim/pack/minpac/opt/minpac
+"
+" Neovim:
+"
+"    git clone https://github.com/k-takata/minpac.git \
+"        ~/.config/nvim/pack/minpac/opt/minpac
 "
 
 set nocompatible                 " Use vim not vi
