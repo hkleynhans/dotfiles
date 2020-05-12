@@ -17,9 +17,14 @@ set nocompatible                 " Use vim not vi
 set exrc                         " enable per-directory .vimrc files
 set secure                       " Disable unsafe commands
 
+if !has('gui_running')
+	set t_Co=256
+endif
+
 packadd minpac
 call minpac#init()
 
+call minpac#add('morhetz/gruvbox')
 call minpac#add('tomasr/molokai')
 
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
@@ -28,6 +33,9 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('dense-analysis/ale')
 
 call minpac#add('itchyny/lightline.vim')
+call minpac#add('shinchu/lightline-gruvbox.vim')
+
+call minpac#add('editorconfig/editorconfig-vim')
 
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-dispatch')
@@ -36,6 +44,11 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('rhysd/vim-clang-format')
 
 call minpac#add('qpkorr/vim-bufkill')
+
+" Syntactic language support
+call minpac#add('cespare/vim-toml')
+call minpac#add('stephpy/vim-yaml')
+call minpac#add('plasticboy/vim-markdown')
 
 packloadall
 silent !helptags ALL
@@ -48,6 +61,8 @@ let g:ale_sign_column_always = 1
 
 let g:fzf_command_prefix='Fzf'
 
+let g:lightline = { 'colorscheme': 'gruvbox' }
+
 let python_highlight_all=1
 
 let g:vim_markdown_folding_disabled = 1
@@ -55,9 +70,6 @@ let g:vim_markdown_folding_disabled = 1
 set autoread
 set display+=lastline
 set formatoptions+=j            " Delete comment char when joining commented lines
-
-set statusline+=%#warningmsg#
-set statusline+=%*
 
 set autowrite                   " Automatically save if we are switching buffers
 set backspace=indent,eol,start  " Allow backspacing over everything
@@ -111,7 +123,7 @@ set nolist                      " Make whitespace characters visible
 syn on
 set background=dark
 set t_Co=256                    " Enable 256 colors
-colorscheme molokai
+colorscheme gruvbox
 
 hi clear SpellBad
 hi SpellBad cterm=underline ctermbg=52
@@ -132,6 +144,7 @@ set autoindent                  " Put the cursor in the right place on newline
 set smartindent                 " Put the cursor in the right place on newline
 filetype plugin indent on
 
+let mapleader = ','
 noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 noremap <leader>e :FzfFiles<cr>
 noremap <leader>f :FzfBuffers<cr>
@@ -151,9 +164,9 @@ let g:clang_format#detect_style_file=1
 
 " map to <Leader>cf in C++ code
 aug cpp
-    au FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-    au FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-    au FileType c,cpp,objc ClangFormatAutoEnable
+    au FileType c,cpp,objc nnoremap <buffer><Leader>c :<C-u>ClangFormat<CR>
+    au FileType c,cpp,objc vnoremap <buffer><Leader>c :ClangFormat<CR>
+    " au FileType c,cpp,objc ClangFormatAutoEnable
     au FileType c,cpp,objc set expandtab   " Insert spaces instead of tabs
 aug END
 
