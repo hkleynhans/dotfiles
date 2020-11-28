@@ -45,6 +45,8 @@ call minpac#add('rhysd/vim-clang-format')
 
 call minpac#add('qpkorr/vim-bufkill')
 
+call minpac#add('fatih/vim-go')
+
 " Syntactic language support
 call minpac#add('cespare/vim-toml')
 call minpac#add('stephpy/vim-yaml')
@@ -54,6 +56,9 @@ packloadall
 silent !helptags ALL
 
 filetype plugin indent on
+
+let g:go_fmt_command='goimports'
+let g:go_auto_type_info=1
 
 let g:airline#extensions#ale#enabled = 1
 
@@ -183,6 +188,11 @@ aug pygroup
   au FileType python setlocal fileformat=unix
   "au BufWritePost *.py call Flake8()
   au FileType python set expandtab           " Insert spaces instead of tabs
+aug END
+
+aug go
+	au!
+	au FileType go inoremap <buffer> . .<C-x><C-o>
 aug END
 
 " Highlight trailing spaces

@@ -1,0 +1,122 @@
+;;; init.el -- Emacs configuration file
+;;; commentary:
+;;; code:
+
+;; Remove UI components
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; --------------------------------------------------------------------------------
+;; Bootstrap straight package manager
+;; --------------------------------------------------------------------------------
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+
+(setq straight-use-package-by-default t)
+
+;; --------------------------------------------------------------------------------
+;; Themes
+;; --------------------------------------------------------------------------------
+
+;; Configure a default custom fase.
+(setq default-frame-alist '((font . "Fira Code 12")))
+
+;; Use the doom-dracula color scheme
+(use-package doom-themes
+  :init
+  (load-theme 'doom-dracula t))
+
+(use-package solaire-mode
+  :init
+  (solaire-global-mode))
+
+(use-package rainbow-delimiters)
+
+
+;; --------------------------------------------------------------------------------
+;; Editor changes
+;; --------------------------------------------------------------------------------
+
+;; Store backups and auto-save files in a single directory so that
+;; they don’t clutter up my filesystem (or fail to be written on curlftpfs):
+(let ((backupdir (format "%s/emacs-backups%d/" (or (getenv "XDG_RUNTIME_DIR") "/tmp") (user-uid))))
+  (mkdir backupdir t)
+  (setq backup-directory-alist `(("." . ,backupdir)))
+  (setq auto-save-file-name-transforms
+	`((".*" ,backupdir t))))
+
+
+(use-package diminish)
+
+(use-package ivy
+  :init
+  (ivy-mode 1))
+
+(use-package counsel
+  :after (ivy)
+  :bind (("C-x C-f" . counsel-find-file)
+	 )
+  )
+
+(use-package swiper
+  :bind (("C-s" . swiper-isearch)
+	 ("C-r" . swiper-isearch-backwards)
+	 ("C-q" . swiper-isearch-thing-at-point))
+  )
+
+(use-package go-mode
+  :init (add-hook 'go-mode-hook
+		  (lambda()
+		    (add-hook 'before-save-hook 'gofmt-before-save)
+		    (if (not (string-match "go" compile-command))
+			(set (make-local-variable 'compile-command)
+			     "go build -v && go test -v && go vet"))
+		    (setq gofmt-command "goimports")
+		    (setq truncate-lines t)
+		    (setq indent-tabs-mode t)
+		    (setq tab-width 8))))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :config (progn
+	    (setq lsp-auto-guess-root t)
+	    (setq lsp-prefer-flymake nil))
+  :hook ((go-mode . lsp-deferred)))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-sideline-enable nil
+	lsp-ui-doc-enable nil
+	lsp-ui-flymake-enable nil
+	lsp-ui-imenu-enable nil
+	lsp-ui-sideline-ignore-duplicate t))
+
+(use-package flycheck
+  :init (add-hook 'after-init-hook 'global-flycheck-mode))
+
+(use-package company
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package company-lsp
+  :commands company-lsp
+  :config (push 'company-lsp company-backends))
+
+(use-package magit)
+
+;;; init.el ends here
