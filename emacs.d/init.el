@@ -51,13 +51,33 @@
 ;; Editor changes
 ;; --------------------------------------------------------------------------------
 
-;; Store backups and auto-save files in a single directory so that
-;; they don’t clutter up my filesystem (or fail to be written on curlftpfs):
+;; Store backups and auto-save files in a single directory so that they don’t
+;; clutter up my filesystem (or fail to be written on curlftpfs):
 (let ((backupdir (format "%s/emacs-backups%d/" (or (getenv "XDG_RUNTIME_DIR") "/tmp") (user-uid))))
   (mkdir backupdir t)
   (setq backup-directory-alist `(("." . ,backupdir)))
   (setq auto-save-file-name-transforms
 	`((".*" ,backupdir t))))
+
+
+;; Don't ask to save files before compilation, just save them.
+(setq compilation-ask-about-save nil)
+
+;; Don't ask to kill the current compilation, just kill it.
+(setq compilation-always-kill t)
+
+;; All prompts should be y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Automatically revert buffers when files change.
+(global-auto-revert-mode t)
+
+;; Default fill column of 80 characters for line wrapping using M-q
+(setq-default fill-column 80)
+
+;; Display line and column numbers is all modes.
+(setq line-number-mode t)
+(setq column-number-mode t)
 
 
 (use-package diminish)
@@ -118,5 +138,11 @@
   :config (push 'company-lsp company-backends))
 
 (use-package magit)
+
+(use-package editorconfig
+  :config
+  (editorconfig-mode 1))
+
+
 
 ;;; init.el ends here
