@@ -1,6 +1,6 @@
 [user]
     name = Henry Kleynhans
-    email = 
+    email =
 [alias]
     logdog = log --decorate --oneline --graph
     logdogsimple = log --decorate --oneline --graph --simplify-by-decoration
