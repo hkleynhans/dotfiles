@@ -69,7 +69,7 @@
 (use-package counsel
   :after (ivy)
   :bind (("C-x C-f" . counsel-find-file)
-	 )
+	 ("<f5>" . compile))
   )
 
 (use-package swiper
