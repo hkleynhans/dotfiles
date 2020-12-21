@@ -45,6 +45,8 @@ call minpac#add('rhysd/vim-clang-format')
 
 call minpac#add('qpkorr/vim-bufkill')
 
+call minpac#add('benmills/vimux')
+
 call minpac#add('fatih/vim-go')
 
 " Syntactic language support
