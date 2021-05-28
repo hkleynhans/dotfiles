@@ -73,7 +73,8 @@
 (use-package counsel
   :after (ivy)
   :bind (("C-x C-f" . counsel-find-file)
-	 ("<f5>" . compile))
+	 ("C-<f5>" . compile)
+  	 ("<f5>" . recompile))
   )
 
 (use-package swiper
@@ -99,7 +100,9 @@
   :config (progn
 	    (setq lsp-auto-guess-root t)
 	    (setq lsp-prefer-flymake nil))
-  :hook ((go-mode . lsp-deferred)))
+  :hook ((go-mode . lsp-deferred)
+	 (c-mode . lsp-deferred)
+	 (c++-mode . lsp-deferred)))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -129,6 +132,9 @@
 
 (use-package ace-window
   :bind ("M-o" . ace-window))
+
+(use-package avy
+  :bind ("C-;" . avy-goto-char))
 
 (use-package which-key
   :config
