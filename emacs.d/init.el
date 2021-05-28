@@ -1,33 +1,12 @@
 ;;; init.el -- Emacs configuration file
-;;; commentary:
-;;; code:
+;;; Commentary:
+;;; Code:
 
 ;; Remove UI components
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (global-hl-line-mode 1)
-
-;; --------------------------------------------------------------------------------
-;; Bootstrap straight package manager
-;; --------------------------------------------------------------------------------
-
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(straight-use-package 'use-package)
-
-(setq straight-use-package-by-default t)
 
 ;; --------------------------------------------------------------------------------
 ;; Themes
@@ -60,6 +39,10 @@
   (setq auto-save-file-name-transforms
 	`((".*" ,backupdir t))))
 
+
+;; Stop playing noises.
+(setq ring-bell-function 'ignore)
+(setq visible-bell t)
 
 ;; Don't ask to save files before compilation, just save them.
 (setq compilation-ask-about-save nil)
@@ -144,6 +127,17 @@
   :config
   (editorconfig-mode 1))
 
+(use-package ace-window
+  :bind ("M-o" . ace-window))
 
+(use-package which-key
+  :config
+  (which-key-mode 1))
+
+;; join line to next line
+(global-set-key (kbd "C-j")
+            (lambda ()
+                  (interactive)
+                  (join-line -1)))
 
 ;;; init.el ends here
