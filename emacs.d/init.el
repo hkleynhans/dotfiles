@@ -170,4 +170,6 @@
                   (interactive)
                   (join-line -1)))
 
+(toggle-frame-fullscreen)
+
 ;;; init.el ends here

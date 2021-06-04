@@ -9,7 +9,6 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
-(toggle-frame-maximized)
 
 ;; GarbageCollection
 (setq gc-cons-threshold 402653184
