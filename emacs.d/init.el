@@ -74,6 +74,7 @@
 (use-package diminish)
 
 (use-package ivy
+  :diminish ivy-mode
   :init
   (ivy-mode 1))
 
@@ -124,9 +125,11 @@
 	lsp-ui-sideline-ignore-duplicate t))
 
 (use-package flycheck
+  :diminish flycheck-mode
   :init (add-hook 'after-init-hook 'global-flycheck-mode))
 
 (use-package company
+  :diminish company-mode
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -137,6 +140,7 @@
 (use-package magit)
 
 (use-package editorconfig
+  :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
 
