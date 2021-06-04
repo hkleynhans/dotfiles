@@ -73,6 +73,9 @@
 
 (use-package diminish)
 
+(use-package eldoc
+  :diminish eldoc-mode)
+
 (use-package ivy
   :diminish ivy-mode
   :init
@@ -151,6 +154,7 @@
   :bind ("C-;" . avy-goto-char))
 
 (use-package which-key
+  :diminish which-key-mode
   :config
   (which-key-mode 1))
 
