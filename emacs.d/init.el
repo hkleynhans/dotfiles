@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Remove UI components
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
 (global-hl-line-mode 1)
 
 ;; --------------------------------------------------------------------------------
@@ -26,10 +22,18 @@
 
 (use-package rainbow-delimiters)
 
-
 ;; --------------------------------------------------------------------------------
 ;; Editor changes
+
 ;; --------------------------------------------------------------------------------
+
+;; Common keyboard shortcuts
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\M-p" 'fill-paragraph)
 
 ;; Store backups and auto-save files in a single directory so that they don’t
 ;; clutter up my filesystem (or fail to be written on curlftpfs):
@@ -59,10 +63,13 @@
 ;; Default fill column of 80 characters for line wrapping using M-q
 (setq-default fill-column 80)
 
+;; Show matching parenthesis
+(show-paren-mode t)
+(setq show-paren-style 'mixed)
+
 ;; Display line and column numbers is all modes.
 (setq line-number-mode t)
 (setq column-number-mode t)
-
 
 (use-package diminish)
 
@@ -95,6 +102,8 @@
 		    (setq indent-tabs-mode t)
 		    (setq tab-width 8))))
 
+(use-package lsp-pyright)
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :config (progn
@@ -102,7 +111,8 @@
 	    (setq lsp-prefer-flymake nil))
   :hook ((go-mode . lsp-deferred)
 	 (c-mode . lsp-deferred)
-	 (c++-mode . lsp-deferred)))
+	 (c++-mode . lsp-deferred)
+	 (python-mode . lsp-deferred)))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -140,6 +150,12 @@
   :config
   (which-key-mode 1))
 
+(use-package org
+  :config
+  (setq org-directory "~/org")
+  (setq org-log-done t)
+  (setq org-startup-indented t))
+  
 ;; join line to next line
 (global-set-key (kbd "C-j")
             (lambda ()
