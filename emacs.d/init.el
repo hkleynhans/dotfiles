@@ -28,12 +28,12 @@
 ;; --------------------------------------------------------------------------------
 
 ;; Common keyboard shortcuts
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\C-x\C-m" 'execute-extended-command)
-(global-set-key "\M-p" 'fill-paragraph)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-x C-k") 'kill-region)
+(global-set-key (kbd "C-c C-k") 'kill-region)
+(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+(global-set-key (kbd "M-p") 'fill-paragraph)
 
 ;; Store backups and auto-save files in a single directory so that they don’t
 ;; clutter up my filesystem (or fail to be written on curlftpfs):
@@ -126,6 +126,15 @@
 	lsp-ui-flymake-enable nil
 	lsp-ui-imenu-enable nil
 	lsp-ui-sideline-ignore-duplicate t))
+
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
+
+(use-package dap-mode
+  :config
+  (require 'dap-go)
+  (require 'dap-python)
+  (require 'dap-lldb))
 
 (use-package flycheck
   :diminish flycheck-mode
