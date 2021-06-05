@@ -106,9 +106,8 @@
 		    (setq indent-tabs-mode t)
 		    (setq tab-width 8))))
 
-(use-package lsp-pyright)
-
 (use-package lsp-mode
+  :init (setq lsp-keymap-prefix "C-c l")
   :commands (lsp lsp-deferred)
   :config (progn
 	    (setq lsp-auto-guess-root t)
@@ -117,6 +116,8 @@
 	 (c-mode . lsp-deferred)
 	 (c++-mode . lsp-deferred)
 	 (python-mode . lsp-deferred)))
+
+(use-package lsp-pyright)
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -145,9 +146,27 @@
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package company-box
+  :diminish company-box-mode
+  :hook (company-mode . company-box-mode))
+
 (use-package company-lsp
   :commands company-lsp
   :config (push 'company-lsp company-backends))
+
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Projects")
+    (setq projectile-project-search-path '("~/Projects")))
+  (setq projectile-search-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :diminish counsel-projectile-mode
+  :config (counsel-projectile-mode))
 
 (use-package magit)
 
