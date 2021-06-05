@@ -71,6 +71,34 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
+;; Show column numbers for some modes
+(dolist (mode '(text-mode-hook
+		prog-mode-hook
+		conf-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+
+;; Use dooom modeline.  This requires manually running:
+;;    M-x all-the-icons-install-fonts
+;; one time.
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode t)
+  :custom ((doom-modeline-height 15)))
+
+;; Override some modes which derive from the above.
+(dolist (mode '(org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; Do not warn on large files
+(setq large-file-warning-threshold nil)
+
+;; do not warn when following symlinks
+(setq vc-follow-symlinks t)
+
+;; do not warn when advice is added for a function
+(setq ad-redefinition-action 'accept)
+
 (use-package diminish)
 
 (use-package eldoc
