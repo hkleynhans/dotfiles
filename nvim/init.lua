@@ -28,6 +28,10 @@ paq {'junegunn/fzf.vim'}
 paq {'morhetz/gruvbox'}
 paq {'ojroques/nvim-lspfuzzy'}
 paq {'editorconfig/editorconfig-vim'}
+paq {'mfussenegger/nvim-dap'}
+paq {'rcarriga/nvim-dap-ui'}
+paq {'theHamsta/nvim-dap-virtual-text'}
+paq {'ray-x/go.nvim'}
 
 g['deoplete#enable_at_startup'] = 1  -- enable deoplete at startup
 
@@ -65,9 +69,7 @@ opt.updatetime = 100                -- Delay before swap file is saved
 opt.wildmode = {'list', 'longest'}  -- Command-line completion mode
 opt.wrap = false                    -- Disable line wrap
 
-cmd 'nohlsearch'
-
-g.mapleader = ','
+g.mapleader = ' '
 
 ---------------------------------- TREE-SITTER --------------------------------
 local ts = require 'nvim-treesitter.configs'
@@ -82,6 +84,15 @@ lsp.ccls.setup {}
 lsp.pylsp.setup {}
 lspfuzzy.setup {}  -- Make the LSP client use FZF instead of the quickfix list
 
+map('n', '<leader>n', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+map('n', '<leader>p', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+map('n', '<leader>d', '<cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', '<leader>i', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+map('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>')
+map('n', '<leader>m', '<cmd>lua vim.lsp.buf.rename()<CR>')
+map('n', '<leader>r', '<cmd>lua vim.lsp.buf.references()<CR>')
+map('n', '<leader>s', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 
 ---------------------------------- MAPPINGS -----------------------------------
 
@@ -93,4 +104,7 @@ g.fzf_command_prefix='Fzf'
 map('n', '<leader>b', '<cmd>FzfBuffers<CR>')
 map('n', '<leader>f', '<cmd>FzfFiles<CR>')
 map('n', '<leader>t', '<cmd>FzfTags<CR>')
+
+-- Once we press enter, the search should is done.
+cmd 'set nohlsearch'
 
