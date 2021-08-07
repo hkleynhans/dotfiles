@@ -20,7 +20,8 @@
   :init
   (solaire-global-mode))
 
-(use-package rainbow-delimiters)
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; --------------------------------------------------------------------------------
 ;; Editor changes
@@ -79,11 +80,11 @@
 ;; Use dooom modeline.  This requires manually running:
 ;;    M-x all-the-icons-install-fonts
 ;; one time.
-(use-package all-the-icons)
+(use-package all-the-icons :ensure t)
 
 (use-package doom-modeline
   :init (doom-modeline-mode t)
-  :custom ((doom-modeline-height 15)))
+  :custom (doom-modeline-height 15))
 
 ;; Override some modes which derive from the above.
 (dolist (mode '(org-mode-hook))
@@ -109,7 +110,7 @@
   (ivy-mode 1))
 
 (use-package counsel
-  :after (ivy)
+  :after ivy
   :bind (("C-x C-f" . counsel-find-file)
 	 ("C-<f5>" . compile)
   	 ("<f5>" . recompile))
