@@ -87,6 +87,8 @@ set spelllang=en_gb             " Preferred dictionary
 
 set ttyfast                     " Local terminal
 
+set cursorline                  " Highlight the current line
+
 set showmatch                   " Show matching brackets
 set showmode                    " Show the current mode
 set showcmd                     " Show the command as it is typed
@@ -151,7 +153,7 @@ set autoindent                  " Put the cursor in the right place on newline
 set smartindent                 " Put the cursor in the right place on newline
 filetype plugin indent on
 
-let mapleader = ','
+let mapleader = ' '
 noremap <leader><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 noremap <leader>e :FzfFiles<cr>
 noremap <leader>f :FzfBuffers<cr>
