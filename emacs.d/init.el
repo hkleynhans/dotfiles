@@ -110,7 +110,8 @@
   (ivy-mode 1))
 
 (use-package expand-region
-  :bind ("C-=" . er/expand-region))
+  :bind (("C-=" . er/expand-region)
+	 ("C--" . er/contract-region)))
 
 (use-package counsel
   :after ivy
