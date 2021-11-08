@@ -19,10 +19,13 @@ end
 cmd 'packadd paq-nvim'               -- load the package manager
 local paq = require('paq-nvim').paq  -- a convenient alias
 paq {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
+
+paq {'neovim/nvim-lspconfig'}
+
 paq {'shougo/deoplete-lsp'}
 paq {'shougo/deoplete.nvim', run = fn['remote#host#UpdateRemotePlugins']}
+
 paq {'nvim-treesitter/nvim-treesitter'}
-paq {'neovim/nvim-lspconfig'}
 paq {'junegunn/fzf', run = fn['fzf#install']}
 paq {'junegunn/fzf.vim'}
 paq {'morhetz/gruvbox'}
@@ -33,7 +36,15 @@ paq {'rcarriga/nvim-dap-ui'}
 paq {'theHamsta/nvim-dap-virtual-text'}
 paq {'ray-x/go.nvim'}
 
+paq {'rust-lang/rust.vim'}
+paq {'simrat39/rust-tools.nvim'}
+
+paq {'nvim-lua/popup.nvim'}
+paq {'nvim-lua/plenary.nvim'}
+paq {'nvim-telescope/telescope.nvim'}
+
 g['deoplete#enable_at_startup'] = 1  -- enable deoplete at startup
+g['rustfmt_autosave'] = 1 -- Format on save
 
 cmd 'colorscheme gruvbox'
 
@@ -78,10 +89,36 @@ ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 ---------------------------------- LSP ----------------------------------------
 local lsp = require 'lspconfig'
 local lspfuzzy = require 'lspfuzzy'
+local rust_tools = require 'rust-tools'
 
 -- We use the default settings for ccls and pylsp: the option table can stay empty
+rust_tools.setup {}
 lsp.ccls.setup {}
 lsp.pylsp.setup {}
+lsp.rust_analyzer.setup {
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      assist = {
+        importMergeBehavior = "last",
+        importPrefix = "by_self",
+      },
+      diagnostics = {
+        disabled = { "unresolved-import" }
+      },
+      cargo = {
+          loadOutDirsFromCheck = true
+      },
+      procMacro = {
+          enable = true
+      },
+      checkOnSave = {
+          command = "clippy"
+      },
+    }
+  }
+}
+
 lspfuzzy.setup {}  -- Make the LSP client use FZF instead of the quickfix list
 
 map('n', '<leader>n', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
@@ -107,4 +144,38 @@ map('n', '<leader>t', '<cmd>FzfTags<CR>')
 
 -- Once we press enter, the search should is done.
 cmd 'set nohlsearch'
+
+-------------------------------- Experimental ---------------------------------
+--local sumneko_binary_path = vim.fn.exepath('lua-language-server')
+--local sumneko_root_path = vim.fn.fnamemodify(sumneko_binary_path, ':h:h:h')
+
+--local runtime_path = vim.split(package.path, ';')
+--table.insert(runtime_path, "lua/?.lua")
+--table.insert(runtime_path, "lua/?/init.lua")
+--
+--lsp.sumneko_lua.setup {
+--  cmd = {sumneko_binary_path, "-E", sumneko_root_path .. "/main.lua"};
+--  settings = {
+--    Lua = {
+--      runtime = {
+--        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--        version = 'LuaJIT',
+--        -- Setup your lua path
+--        path = runtime_path,
+--      },
+--      diagnostics = {
+--        -- Get the language server to recognize the `vim` global
+--        globals = {'vim'},
+--      },
+--      workspace = {
+--        -- Make the server aware of Neovim runtime files
+--        library = vim.api.nvim_get_runtime_file("", true),
+--      },
+--      -- Do not send telemetry data containing a randomized but unique identifier
+--      telemetry = {
+--        enable = false,
+--      },
+--    },
+--  },
+--}
 

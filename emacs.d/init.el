@@ -138,6 +138,11 @@
 		    (setq indent-tabs-mode t)
 		    (setq tab-width 8))))
 
+(use-package rustic
+  :ensure
+  :config
+  (setq rustic-format-on-save t))
+
 (use-package lsp-mode
   :init (setq lsp-keymap-prefix "C-c l")
   :commands (lsp lsp-deferred)
