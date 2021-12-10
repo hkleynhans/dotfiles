@@ -7,11 +7,14 @@
 
 - create:
     - ~/.config/nvim
+    - ~/.config/kitty
 
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
     ~/.config/nvim/init.lua: nvim/init.lua
+    ~/.config/kitty/dracula.conf: kitty/dracula.conf
+    ~/.config/kitty/kitty.conf: kitty/kitty.conf
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
