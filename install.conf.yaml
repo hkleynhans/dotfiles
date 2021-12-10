@@ -5,9 +5,13 @@
 
 - clean: ['~']
 
+- create:
+    - ~/.config/nvim
+
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/.config/nvim/init.lua: nvim/init.lua
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
