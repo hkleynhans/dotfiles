@@ -15,6 +15,7 @@
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/kitty/dracula.conf: kitty/dracula.conf
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
+    ~/.zshrc: zshrc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
