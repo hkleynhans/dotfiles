@@ -16,9 +16,9 @@ end
 --    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/opt/paq-nvim
 --
 
-cmd 'packadd paq-nvim'               -- load the package manager
-local paq = require('paq-nvim').paq  -- a convenient alias
-paq {'savq/paq-nvim', opt = true}    -- paq-nvim manages itself
+cmd 'packadd paq-nvim'
+local paq = require('paq-nvim').paq
+paq {'savq/paq-nvim', opt = true}
 
 paq {'neovim/nvim-lspconfig'}
 
@@ -29,11 +29,17 @@ paq {'nvim-treesitter/nvim-treesitter'}
 paq {'junegunn/fzf', run = fn['fzf#install']}
 paq {'junegunn/fzf.vim'}
 paq {'morhetz/gruvbox'}
+paq {'Mofiqul/dracula.nvim'}
 paq {'ojroques/nvim-lspfuzzy'}
+
 paq {'editorconfig/editorconfig-vim'}
+
 paq {'mfussenegger/nvim-dap'}
 paq {'rcarriga/nvim-dap-ui'}
 paq {'theHamsta/nvim-dap-virtual-text'}
+
+paq {'rhysd/vim-clang-format'}
+
 paq {'ray-x/go.nvim'}
 
 paq {'rust-lang/rust.vim'}
@@ -43,13 +49,17 @@ paq {'nvim-lua/popup.nvim'}
 paq {'nvim-lua/plenary.nvim'}
 paq {'nvim-telescope/telescope.nvim'}
 
-g['deoplete#enable_at_startup'] = 1  -- enable deoplete at startup
-g['rustfmt_autosave'] = 1 -- Format on save
 
+g['deoplete#enable_at_startup'] = 1
+g['rustfmt_autosave'] = 1
+
+-- gruvbox seems to be the better theme.
 cmd 'colorscheme gruvbox'
+-- cmd 'colorscheme dracula'
 
 ---------------------------------- OPTIONS ------------------------------------
-local indent, width = 2, 80
+local indent, tabstop, width = 4, 8, 80
+opt.cindent = true
 opt.colorcolumn = tostring(width)   -- Line length marker
 opt.completeopt = {'menuone', 'noinsert', 'noselect'}  -- Completion options
 opt.cursorline = true               -- Highlight cursor line
@@ -73,7 +83,7 @@ opt.smartcase = true                -- Do not ignore case with capitals
 opt.smartindent = true              -- Insert indents automatically
 opt.splitbelow = true               -- Put new windows below current
 opt.splitright = true               -- Put new windows right of current
-opt.tabstop = indent                -- Number of spaces tabs count for
+opt.tabstop = tabstop               -- Number of spaces tabs count for
 opt.termguicolors = true            -- True color support
 opt.textwidth = width               -- Maximum width of text
 opt.updatetime = 100                -- Delay before swap file is saved
@@ -81,6 +91,11 @@ opt.wildmode = {'list', 'longest'}  -- Command-line completion mode
 opt.wrap = false                    -- Disable line wrap
 
 g.mapleader = ' '
+
+----------------------- Edit and Reload configuration -------------------------
+
+map('n', '<leader>ve', '<cmd>edit ~/.config/nvim/init.lua<CR>')
+map('n', '<leader>vr', '<cmd>source ~/.config/nvim/init.lua<CR>')
 
 ---------------------------------- TREE-SITTER --------------------------------
 local ts = require 'nvim-treesitter.configs'
@@ -94,7 +109,9 @@ local rust_tools = require 'rust-tools'
 -- We use the default settings for ccls and pylsp: the option table can stay empty
 rust_tools.setup {}
 lsp.ccls.setup {}
-lsp.pylsp.setup {}
+-- Not sure which of these python lsp servers to use.
+-- lsp.pylsp.setup {}
+-- lsp.pyls.setup {}
 lsp.rust_analyzer.setup {
   on_attach = on_attach,
   settings = {
@@ -124,6 +141,7 @@ lspfuzzy.setup {}  -- Make the LSP client use FZF instead of the quickfix list
 map('n', '<leader>n', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 map('n', '<leader>p', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+map('n', '<leader>D', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 map('n', '<leader>d', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', '<leader>i', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 map('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -141,6 +159,9 @@ g.fzf_command_prefix='Fzf'
 map('n', '<leader>b', '<cmd>FzfBuffers<CR>')
 map('n', '<leader>f', '<cmd>FzfFiles<CR>')
 map('n', '<leader>t', '<cmd>FzfTags<CR>')
+
+-- ClangFormat.  May need to configure per mode.
+map('n', '<leader>=', '<cmd>ClangFormat<CR>')
 
 -- Once we press enter, the search should is done.
 cmd 'set nohlsearch'
