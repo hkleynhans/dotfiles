@@ -8,6 +8,7 @@
 - create:
     - ~/.config/nvim
     - ~/.config/kitty
+    - ~/.config/mutt
 
 - link:
     ~/.tmux.conf: tmux.conf
@@ -15,6 +16,7 @@
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/kitty/dracula.conf: kitty/dracula.conf
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
+    ~/.config/mutt/muttrc mutt/muttrc
     ~/.zshrc: zshrc
 
 - shell:

@@ -40,7 +40,8 @@ paq {'theHamsta/nvim-dap-virtual-text'}
 
 paq {'rhysd/vim-clang-format'}
 
-paq {'ray-x/go.nvim'}
+-- paq {'ray-x/go.nvim'}
+paq {'fatih/vim-go'}
 
 paq {'rust-lang/rust.vim'}
 paq {'simrat39/rust-tools.nvim'}
@@ -101,7 +102,48 @@ map('n', '<leader>vr', '<cmd>source ~/.config/nvim/init.lua<CR>')
 local ts = require 'nvim-treesitter.configs'
 ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 
+---------------------------------- GO -----------------------------------------
+g["go_highlight_types"] = 1
+g["go_highlight_fields"] = 1
+g["go_highlight_functions"] = 1
+g["go_highlight_function_calls"] = 1
+g["go_highlight_operators"] = 1
+g["go_highlight_extra_types"] = 1
+g["go_highlight_build_constraints"] = 1
+g["go_highlight_generate_tags"] = 1
+
+local go = require 'go'
+go.setup{
+    verbose = false,
+
+    dap_debug = true,
+    dap_debug_keymap = false,
+    dap_debug_gui = true,
+    dap_debug_vt = true,
+
+    lsp_cfg = false,
+    lsp_fofumpt = false,
+    lsp_on_attach = false,
+    gopls_cmd = nil,
+}
+
+cmd([[
+augroup golang
+    au!
+    au BufEnter *.go set et
+    au BufEnter *.go nmap <leader>t  <Plug>(go-test)
+    au BufEnter *.go nmap <leader>tt <Plug>(go-test-func)
+    au BufEnter *.go nmap <leader>c  <Plug>(go-coverage-toggle)
+    au BufEnter *.go nmap <leader>i  <Plug>(go-info)
+    au BufEnter *.go nmap <leader>ii <Plug>(go-implements)
+    au BufEnter *.go nmap <leader>ci <Plug>(go-describe)
+    au BufEnter *.go nmap <leader>cc <Plug>(go-callers)
+augroup END
+]])
+
 ---------------------------------- LSP ----------------------------------------
+-- require('go').setup()
+
 local lsp = require 'lspconfig'
 local lspfuzzy = require 'lspfuzzy'
 local rust_tools = require 'rust-tools'
@@ -109,6 +151,8 @@ local rust_tools = require 'rust-tools'
 -- We use the default settings for ccls and pylsp: the option table can stay empty
 rust_tools.setup {}
 lsp.ccls.setup {}
+lsp.gopls.setup {}
+
 -- Not sure which of these python lsp servers to use.
 -- lsp.pylsp.setup {}
 -- lsp.pyls.setup {}
