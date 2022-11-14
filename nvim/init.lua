@@ -25,7 +25,8 @@ paq {'neovim/nvim-lspconfig'}
 paq {'shougo/deoplete-lsp'}
 paq {'shougo/deoplete.nvim', run = fn['remote#host#UpdateRemotePlugins']}
 
-paq {'nvim-treesitter/nvim-treesitter'}
+paq {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']}
+
 paq {'junegunn/fzf', run = fn['fzf#install']}
 paq {'junegunn/fzf.vim'}
 paq {'morhetz/gruvbox'}
@@ -49,14 +50,12 @@ paq {'simrat39/rust-tools.nvim'}
 paq {'nvim-lua/popup.nvim'}
 paq {'nvim-lua/plenary.nvim'}
 paq {'nvim-telescope/telescope.nvim'}
-
+paq {'folke/tokyonight.nvim'}
 
 g['deoplete#enable_at_startup'] = 1
 g['rustfmt_autosave'] = 1
 
--- gruvbox seems to be the better theme.
-cmd 'colorscheme gruvbox'
--- cmd 'colorscheme dracula'
+cmd 'colorscheme tokyonight'
 
 ---------------------------------- OPTIONS ------------------------------------
 local indent, tabstop, width = 4, 8, 80
@@ -100,7 +99,7 @@ map('n', '<leader>vr', '<cmd>source ~/.config/nvim/init.lua<CR>')
 
 ---------------------------------- TREE-SITTER --------------------------------
 local ts = require 'nvim-treesitter.configs'
-ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+ts.setup {ensure_installed = 'all', highlight = {enable = true}}
 
 ---------------------------------- GO -----------------------------------------
 -- g["go_highlight_types"] = 1

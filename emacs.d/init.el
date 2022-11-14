@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+
+(setq user-mail-address "henry.kleynhans@gmail.com")
+(setq user-full-name "Henry Kleynhans")
+
 (global-hl-line-mode 1)
 
 ;; --------------------------------------------------------------------------------
@@ -21,7 +25,8 @@
   (solaire-global-mode))
 
 (use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; --------------------------------------------------------------------------------
 ;; Editor changes
@@ -37,12 +42,23 @@
 
 ;; Store backups and auto-save files in a single directory so that they don’t
 ;; clutter up my filesystem (or fail to be written on curlftpfs):
-(let ((backupdir (format "%s/emacs-backups%d/" (or (getenv "XDG_RUNTIME_DIR") "/tmp") (user-uid))))
-  (mkdir backupdir t)
-  (setq backup-directory-alist `(("." . ,backupdir)))
-  (setq auto-save-file-name-transforms
-	`((".*" ,backupdir t))))
+;; (let (backupdir "~/.emacs-backups/")
+;;   (mkdir backupdir t)
+;;   (setq backup-directory-alist `(("." . ,backupdir)))
+;;   (setq auto-save-file-name-transforms
+;; 	`((".*" ,backupdir t))))
 
+(let ((my-auto-save-dir (locate-user-emacs-file "auto-save")))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(expand-file-name "\\2" my-auto-save-dir) t)))
+  (unless (file-exists-p my-auto-save-dir)
+    (make-directory my-auto-save-dir)))
+(setq auto-save-default t
+      auto-save-timeout 10
+      auto-save-interval 200)
+
+;; Use the command key as the emacs meta key.
+(setq mac-command-modifier 'meta)
 
 ;; Stop playing noises.
 (setq ring-bell-function 'ignore)
@@ -147,8 +163,7 @@
   :init (setq lsp-keymap-prefix "C-c l")
   :commands (lsp lsp-deferred)
   :config (progn
-	    (setq lsp-auto-guess-root t)
-	    (setq lsp-prefer-flymake nil))
+	    (setq lsp-auto-guess-root t))
   :hook ((go-mode . lsp-deferred)
 	 (c-mode . lsp-deferred)
 	 (c++-mode . lsp-deferred)
@@ -161,7 +176,6 @@
   :config
   (setq lsp-ui-sideline-enable nil
 	lsp-ui-doc-enable nil
-	lsp-ui-flymake-enable nil
 	lsp-ui-imenu-enable nil
 	lsp-ui-sideline-ignore-duplicate t))
 
@@ -180,6 +194,9 @@
 
 (use-package company
   :diminish company-mode
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 
@@ -205,6 +222,9 @@
   :diminish counsel-projectile-mode
   :config (counsel-projectile-mode))
 
+(use-package go-projectile
+  :diminish)
+
 (use-package magit)
 
 (use-package editorconfig
@@ -214,6 +234,9 @@
 
 (use-package ace-window
   :bind ("M-o" . ace-window))
+
+(use-package ace-jump-mode
+  :bind ("C-c SPC" . ace-jump-mode))
 
 (use-package avy
   :bind ("C-;" . avy-goto-char))
