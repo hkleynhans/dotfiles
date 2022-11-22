@@ -1,0 +1,30 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.workspace.library": [
+        "/Users/henry/.config/nvim",
+        "/Users/henry/.local/share/nvim/site",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/gruvbox",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/LuaSnip",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/neogit",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/onedark.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/popup.nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+        "/opt/homebrew/Cellar/neovim/0.8.0/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.8.0/lib/nvim",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/after",
+        "/Users/henry/.local/share/nvim/site/pack/packer/start/cmp_luasnip/after",
+        "${3rd}/luassert/library"
+    ]
+}
