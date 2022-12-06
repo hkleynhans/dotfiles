@@ -14,12 +14,17 @@ require('lualine').setup {
   },
 }
 
-vim.g['deoplete#enable_at_startup'] = 1
-
 -- keymap
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>f', require('telescope.builtin').find_files, { desc = 'Find existing [f]iles' })
 vim.keymap.set('n', '<leader>g', require('telescope.builtin').grep_string, { desc = 'Find current [w]ord' })
+
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
 -- treesitter
 require('nvim-treesitter.configs').setup {
@@ -49,7 +54,34 @@ local on_attach = function(_, bufnr)
     -- See `:help K` for why this keymap
     nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+    -- nmap('<leader>ff', vim.lsp.buf.format, 'Format document')
 end -- on_attach
+
+local cmp = require("cmp")
+cmp.setup({
+    preselect = cmp.PreselectMode.None,
+    mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        -- Add tab support
+        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+        ["<Tab>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
+    },
+    sources = {
+    	{ name = "nvim_lsp" },
+	{ name = "path" },
+	{ name = "buffer" },
+    },
+})
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()

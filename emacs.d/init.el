@@ -167,7 +167,8 @@
   :hook ((go-mode . lsp-deferred)
 	 (c-mode . lsp-deferred)
 	 (c++-mode . lsp-deferred)
-	 (python-mode . lsp-deferred)))
+	 (python-mode . lsp-deferred)
+	 (rust-mode . lsp-deferred)))
 
 (use-package lsp-pyright)
 
