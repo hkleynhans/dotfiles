@@ -10,3 +10,7 @@ fi
 
 alias python='python3'
 alias pip='pip3'
+
+export PATH="~/.local/bin:$PATH"
+export PICO_SDK_PATH=$(realpath ~/Projects/pico-sdk)
+

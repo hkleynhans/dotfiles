@@ -42,11 +42,17 @@
 
 ;; Store backups and auto-save files in a single directory so that they don’t
 ;; clutter up my filesystem (or fail to be written on curlftpfs):
-;; (let (backupdir "~/.emacs-backups/")
-;;   (mkdir backupdir t)
-;;   (setq backup-directory-alist `(("." . ,backupdir)))
-;;   (setq auto-save-file-name-transforms
-;; 	`((".*" ,backupdir t))))
+(defvar hk-backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p hk-backup-directory))
+    (make-directory hk-backup-directory))
+(setq backup-directory-alist `(("." . ,hk-backup-directory)))
+(setq make-backup-files t
+      backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-old-versions 6
+      kept-new-versions 9
+      )
 
 (let ((my-auto-save-dir (locate-user-emacs-file "auto-save")))
   (setq auto-save-file-name-transforms
@@ -141,6 +147,13 @@
 	 ("C-r" . swiper-isearch-backwards)
 	 ("C-q" . swiper-isearch-thing-at-point))
   )
+
+(use-package clang-format
+  :ensure
+  :bind(("C-c TAB" . clang-format-region))
+  :config
+  (setq clang-format-style "file")
+  (setq clang-format-fallback-style "llvm"))
 
 (use-package go-mode
   :init (add-hook 'go-mode-hook
@@ -237,10 +250,7 @@
   :bind ("M-o" . ace-window))
 
 (use-package ace-jump-mode
-  :bind ("C-c SPC" . ace-jump-mode))
-
-(use-package avy
-  :bind ("C-;" . avy-goto-char))
+  :bind ("C-;" . ace-jump-mode))
 
 (use-package which-key
   :diminish which-key-mode

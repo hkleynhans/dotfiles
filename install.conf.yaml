@@ -9,6 +9,8 @@
     - ~/.config/nvim
     - ~/.config/nvim/lua
     - ~/.config/nvim/lua/hkleynhans
+    - ~/.config/nvim/after
+    - ~/.config/nvim/after/plugin
     - ~/.config/kitty
     - ~/.config/mutt
 
@@ -18,7 +20,11 @@
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/nvim/lua/hkleynhans/init.lua: nvim/lua/hkleynhans/init.lua
     ~/.config/nvim/lua/hkleynhans/packer.lua: nvim/lua/hkleynhans/packer.lua
+    ~/.config/nvim/lua/hkleynhans/remap.lua: nvim/lua/hkleynhans/remap.lua
     ~/.config/nvim/lua/hkleynhans/set.lua: nvim/lua/hkleynhans/set.lua
+    ~/.config/nvim/after/plugin/lsp.lua: nvim/after/plugin/lsp.lua
+    ~/.config/nvim/after/plugin/telescope.lua: nvim/after/plugin/telescope.lua
+    ~/.config/nvim/after/plugin/treesitter.lua: nvim/after/plugin/treesitter.lua
     ~/.config/kitty/dracula.conf: kitty/dracula.conf
     ~/.config/kitty/kitty.conf: kitty/kitty.conf
     ~/.config/mutt/muttrc: mutt/muttrc

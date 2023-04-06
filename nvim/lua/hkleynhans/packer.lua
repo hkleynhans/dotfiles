@@ -10,21 +10,29 @@ end
 return require("packer").startup(function (use)
   use "wbthomason/packer.nvim"
 
-  use { -- LSP
-    "neovim/nvim-lspconfig",
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
     requires = {
-      -- Automatically install LSPs
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
 
-      -- Useful status updates
-      "j-hui/fidget.nvim",
-    },
-  }
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {                                      -- Optional
+        'williamboman/mason.nvim',
+        run = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-  use { -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},     -- Required
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'hrsh7th/cmp-nvim-lua'},
+      {'L3MON4D3/LuaSnip'},     -- Required
+    }
   }
 
   use "TimUntersberger/neogit"
