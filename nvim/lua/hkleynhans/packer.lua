@@ -1,4 +1,4 @@
--- Install packer
+-- Install Packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -51,10 +51,14 @@ return require("packer").startup(function (use)
   use "navarasu/onedark.nvim" -- Theme inspired by Atom
   use "nvim-lualine/lualine.nvim" -- Fancier statusline
 
+  use "mfussenegger/nvim-dap"
+
+  use "Civitasv/cmake-tools.nvim"
+  use "rgroli/other.nvim"
+
+  use "BurntSushi/ripgrep"
+
   if is_bootstrap then
-    require('packer').sync()
+      require("packer").sync()
   end
 end)
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

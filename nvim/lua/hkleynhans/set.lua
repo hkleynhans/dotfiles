@@ -1,35 +1,18 @@
 -- Set VIM options
 
 vim.o.hlsearch = false
+vim.o.incsearch = true
 
--- Line numbers default
-vim.wo.number = true
-
--- Enable mouse
 vim.o.mouse = 'a'
 
--- Save undo history
-vim.o.undofile = true
-
--- Decrease the update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
-
--- Case insensitive unless /C or capital in search string
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Colorscheme
-vim.o.termguicolors = true
 vim.cmd [[colorscheme gruvbox]]
 
--- Completion options
-vim.o.completeopt = 'menuone,noselect'
+vim.o.pastetoggle = "<F2>"
+vim.o.colorcolumn = tostring(80)
 
--- Map Leader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-vim.o.pastetoggle = '<F2>'
-vim.o.colorcolumn = tostring(80)   -- Line length marker
-
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
