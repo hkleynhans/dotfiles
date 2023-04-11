@@ -35,7 +35,7 @@ return require("packer").startup(function (use)
     }
   }
 
-  use "TimUntersberger/neogit"
+  use { "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }
 
   use "nvim-lua/plenary.nvim"
   use "nvim-lua/popup.nvim"
@@ -55,6 +55,7 @@ return require("packer").startup(function (use)
 
   use "Civitasv/cmake-tools.nvim"
   use "rgroli/other.nvim"
+  use "famiu/bufdelete.nvim"
 
   use "BurntSushi/ripgrep"
 
