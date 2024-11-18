@@ -80,6 +80,22 @@ config.keys = {
         action = wezterm.action.PasteFrom 'PrimarySelection',
     },
 
+    -- Tab management
+    {
+        key = 'c',
+        mods = 'LEADER',
+        action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+    },
+    {
+        key = 'p',
+        mods = 'LEADER',
+        action = wezterm.action.ActivateTabRelative(-1),
+    },
+    {
+        key = 'n',
+        mods = 'LEADER',
+        action = wezterm.action.ActivateTabRelative(1),
+    },
 }
 
 wezterm.on('gui-startup', function(cmd)
